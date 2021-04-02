@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <title>Ohio Census Tracts</title>
+  <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+  <script src="https://d3js.org/d3-array.v2.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style type="text/css">
+
+        body {
+            background-color: #eee;
+            font-family: 'Lato';
+            width: 800px;
+            margin: 30px auto;
+        }
+
+        svg {
+            /*background-color: white;*/
+        }
+
+        .tooltip {
+          font-weight: bold;
+          padding: 0.2rem;
+          position: absolute;
+          border: 1px solid silver;
+          background-color: white;
+        }
+
+        .hidden {
+          display: none;
+        }
+
+        #slider {
+          width:760px;
+          /*height:50px;*/
+        }
+
+
+        #slider_labels {
+          width:600px;
+          padding: 0px;
+          margin: 0px;
+          /*height:50px;*/
+        }
+
+        .spacer {
+          padding-top: 20px;
+        }
+
+        #map_2_sidebar {
+          position: absolute;
+        }
+
+        ul {
+		      text-align: justify;
+    		}
+    		ul:after {
+    		    content: '';
+    		    display: inline-block;
+    		    width: 100%;
+    		}
+    		ul:before {
+    		    content: '';
+    		    display: block;
+    		    margin-top: -1.25em;
+    		}
+    		li {
+    		    display: inline-block;
+    		    margin-right: -.25em;
+    		    position: relative;
+    		    top: 1.25em;
+    		}
+
+        #map {
+          background-color: white;
+        } 
+
+    </style>
+</head>
+  <body>
+
+    <h1>Evictions By Week</h1>
+    <p id="value">Week of </p>
+    <div style="padding:20px;">
+    	<div id="slider"></div>
+    	<ul id="slider_labels"></ul>
+	  </div>
+    <div id="map"></div>
+    <div class="spacer"></div>
+    <div id="map_2_sidebar"></div>
+    <div id="map_2"></div>
+
+    <script type="text/javascript">
+
+    function adi_evictions(element)
+    {
+      //Width and height
+        var w = 900;
+        var h = 700;
+
+        //Define map projection
+        var projection = d3.geoMercator()
+                                .center([ -81.681290, 41.505493 ])
+                                .scale([ 40 * w ])
+                                .translate([ w/2, h/2 ]);
+                              
+        // Define nicer colors
+        var colors = d3.scaleSequential(d3.interpolatePlasma).domain([0, 110])
+
+        //Define path generator
+        var path = d3.geoPath().projection(projection);
+
+        //Create SVG
+        var svg = d3.select(element)
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+        var adi = null;
+        var evictions_by_geoid = null;
+        var all_data_by_geoid = null;
+
+        // load our ADI
+        d3.csv("data/broadstreet_adi_ohio.csv").then(res => {
+          adi = res;
+          for(record in adi) {
+            if(adi[record]['geoid2'] != null ) {
+              var newstr = adi[record]['geoid2'].substring(0, adi[record].geoid2.length - 1);
+              adi[record]['tract'] = newstr;
+            } else {
+              console.log('is null');
+            }
+          }
+        });
+
+        // load our ADI
+        d3.csv("data/cleveland_weekly_2020_2021.csv").then(res => {
+          //code dealing with data here
+          all_data_by_geoid = res;
+         evictions_by_geoid = d3.rollups(
+            res,
+            xs => d3.sum(xs, x => x.filings_avg),
+            d => d.GEOID
+          ).map(([k, v]) => ({ geoid: k, average_filings: v }))
+
+         console.log(evictions_by_geoid);
+        });
+
+        var ohio_json = {};
+        var current_week = 1;
+
+        //Load in GeoJSON data
+        d3.json("geojson/cleveland_bg.json").then(res => {
+
+          ohio_json = res;
+          //Bind data and create one path per GeoJSON feature
+          svg.selectAll("path")
+            .data(ohio_json.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+            .attr("stroke","dimgray")
+            .attr("stroke-width","0.1")
+            .attr("fill", function(d,i) {
+              var geoid = d.properties.GEOID;
+              var block = adi.find(e => (e.geoid2 == geoid));
+              if(block != null) {
+                //console.log(block);
+                return colors(block.area_deprivation_index_percent)
+              }
+              return "rgb(240, 240, 255)";
+            })
+            // When the mouse moves over a feature, show the tooltip.
+            .on('mousemove', showTooltip)
+            // When the mouse moves out of a feature, hide the tooltip.
+            .on('mouseout', hideTooltip)
+            // click to show details
+            .on('mousedown', showSidebar);
+  
+        });
+        
+        function zoomed() { 
+            svg.selectAll('path').attr('transform', d3.event.transform);
+        }
+
+        const zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', zoomed);
+        svg.call(zoom);
+
+        ///////////////////////////////////////////////////////////////////////
+        // Sidebar
+        ///////////////////////////////////////////////////////////////////////
+
+        function showSidebar(f) {
+          if( !evictions_by_geoid || !adi) {
+            return;
+          }
+
+          // Get the current mouse position (as integer)
+          var mouse = d3.mouse(d3.select(element).node()).map(
+            function(d) { return parseInt(d); }
+          );
+
+          var cb = adi.find(e => (e.geoid2 == f.properties.GEOID));
+          //var cb_data = all_data_by_geoid.find(e => (e.GEOID == cb.tract));
+          var cb_data = [];
+          for(row in all_data_by_geoid){
+            //console.log(row);
+            if(all_data_by_geoid[row].GEOID == cb.tract) {
+              cb_data.push({filings:all_data_by_geoid[row].filings_2020, 
+                date:d3.timeParse("%Y-%m-%d")(all_data_by_geoid[row].week_date)});
+            }
+          }
+
+          console.log(cb_data);
+
+          var margin = {top: 10, right: 10, bottom: 50, left: 30},
+            width = 300 - margin.left - margin.right,
+            height = 280 - margin.top - margin.bottom;
+
+          d3.select("#map_2_sidebar").selectAll('*').remove();
+
+          // append the svg object to the body of the page
+          var sidebar_svg = d3.select("#map_2_sidebar")
+            .append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+              .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+          var x = d3.scaleTime()
+            .domain(d3.extent(cb_data, function(d) { return d.date; }))
+            .range([ 0, width ]);
+          var x_axis = sidebar_svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(
+                d3.axisBottom(x).tickFormat(function(date){
+                   if (d3.timeYear(date) < date) {
+                     return d3.timeFormat('%b')(date);
+                   } else {
+                     return d3.timeFormat('%Y')(date);
+                   }
+                })
+              );
+
+            x_axis.selectAll("text")  
+              .style("text-anchor", "end")
+              .style("color", "#ccc")
+              .attr("dx", "-.8em")
+              .attr("dy", ".15em")
+              .attr("transform", "rotate(-65)" );
+
+          // Add Y axis
+          var y = d3.scaleLinear()
+            //.domain([0, d3.max(cb_data, function(d) { return +d.filings; })])
+            .domain([0, 15])
+            .range([ height, 0 ]);
+          var y_axis = sidebar_svg.append("g")
+            .call(d3.axisLeft(y));
+
+            y_axis.selectAll("text")  
+            .style("color", "#ccc");
+
+          x_axis.selectAll("line").style("stroke","#ccc");
+          x_axis.selectAll("path").style("stroke","#ccc");
+          y_axis.selectAll("line").style("stroke","#ccc");
+          y_axis.selectAll("path").style("stroke","#ccc");
+
+          // Add the line
+          sidebar_svg.append("path")
+            .datum(cb_data)
+            .attr("fill", "none")
+            .attr("stroke", "white")
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+              .x(function(d) { return x(d.date) })
+              .y(function(d) { return y(d.filings) })
+            )
+
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        // Tooltip
+        ///////////////////////////////////////////////////////////////////////
+
+        var tooltip = d3.select(element)
+          .append("div")
+          .attr("class", "tooltip hidden");
+
+        function showTooltip(f) {
+
+          if( !evictions_by_geoid || !adi) {
+            return;
+          }
+
+          // Get the current mouse position (as integer)
+          var mouse = d3.mouse(d3.select('#map').node()).map(
+            function(d) { return parseInt(d); }
+          );
+
+          // Calculate the absolute left and top offsets of the tooltip. If the
+          // mouse is close to the right border of the map, show the tooltip on
+          // the left.
+          var left = Math.min(w - 4 * f.properties.NAMELSAD.length, mouse[0] + 5);
+          var top = mouse[1] + 25;
+          
+          var cb = adi.find(e => (e.geoid2 == f.properties.GEOID));
+          var evictions = evictions_by_geoid.find(e => (e.geoid == cb.tract));
+          //console.log(city);
+          var tooltipHTML = "";
+          if(evictions != null ) {
+            tooltiphtml = "BroadStreet ADI: " + cb.area_deprivation_index_percent + "<br/> Average Eviction Filings Per Year: " + parseFloat(evictions.average_filings).toFixed(2);
+          } else if(cb != null && cb.area_deprivation_index_percent != "") {
+            tooltiphtml = "BroadStreet ADI: " + cb.area_deprivation_index_percent;
+          } else {
+            tooltiphtml = "No data";
+          }
+
+          // Show the tooltip (unhide it) and set the name of the data entry.
+          // Set the position as calculated before.
+          tooltip.classed('hidden', false)
+            .attr("style", "left:" + left + "px; top:" + top + "px;")
+            .html(tooltiphtml);
+        }
+
+        function hideTooltip() {
+          tooltip.classed('hidden', true);
+        }
+
+    }
+
+    function by_weeks_viz(element)
+    {
+
+      //Width and height
+      var w = 800;
+      var h = 700;
+
+      //Define map projection
+      var projection = d3.geoMercator()
+                              .center([ -82.99, 40.37 ])
+                              .scale([ 10 * w ])
+                              .translate([ w/2, h/2 ]);
+                            
+      // Define nicer colors
+      var colors = d3.scaleSequential(d3.interpolatePlasma).domain([0, 8])
+
+      //Define path generator
+      var path = d3.geoPath().projection(projection);
+
+      //Create SVG
+      var svg = d3.select(element)
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+      var cities = null;
+      var weeks = [];
+
+      d3.csv("data/cities_weekly_2020_2021.csv").then(res => {
+        cities = res;
+        weeks = [... new Set(cities.map(data => data.week_date))]
+        console.log(weeks);
+
+        $( function() {
+  		    $( "#slider" ).slider({
+  		    	height:50,
+  		    	width:800,
+  					min: 0,
+  					max: weeks.length,
+  					slide: function (event, ui) {
+  						svg.selectAll("path")
+  						  .attr("fill", 
+  						  	function(d,i) {
+  						        var geoid = d.properties.GEOID;
+  						        var city = cities.find(e => (e.GEOID == geoid && e.week == ui.value));
+  						        if(city != null) {
+  						        	return colors(city.filings_2020)
+  						        } else {
+  						        	return "none";
+  						        }
+  							}
+  						);
+  						d3.select('#value').text("Week number: " + weeks[ui.value]);
+  						current_week = ui.value;
+  					}
+  			  })
+  			  .each(function() {
+  				    // Get the options for this slider (specified above)
+  				    var opt = $(this).data().uiSlider.options;
+
+  				    // Get the number of possible values
+  				    var vals = opt.max - opt.min;
+
+  				    // Position the labels
+  				    for (var i = 0; i <= vals; i+=5) {
+  				        // Create a new element and position it with percentages
+  				        var el = $('<li>' + (i + opt.min) + '</li>').css('left', (i/vals*100) + '%');
+  				        // Add the element inside #slider
+  				        $("#slider_labels").append(el);
+
+  				    }
+
+  				});
+  	    });
+      });
+
+      var ohio_json = {};
+      var current_week = 1;
+
+      //Load in GeoJSON data
+      d3.json("geojson/ohio_cities.json").then(res =>  {
+
+        ohio_json = res;
+
+        ohio_json['features'].forEach(function(feature) {
+         if(feature.geometry.type == "MultiPolygon") {
+           feature.geometry.coordinates.forEach(function(polygon) {
+
+             polygon.forEach(function(ring) {
+               ring.reverse();
+             })
+           })
+         }
+         else if (feature.geometry.type == "Polygon") {
+           feature.geometry.coordinates.forEach(function(ring) {
+             ring.reverse();
+           })  
+         }
+       });
+
+        //Bind data and create one path per GeoJSON feature
+        svg.selectAll("path")
+          .data(ohio_json.features)
+          .enter()
+          .append("path")
+          .attr("d", path)
+          .attr("stroke", function(d,i) {
+            var geoid = d.properties.GEOID;
+            var city = cities.find(e => (e.GEOID == geoid && e.week == current_week));
+            if(city != null) {
+              return "dimgray"
+            }
+            return "none";
+          })
+          .attr("stroke-width","0.1")
+          .attr("fill", function(d,i) {
+            var geoid = d.properties.GEOID;
+            var city = cities.find(e => (e.GEOID == geoid && e.week == current_week));
+            if(city != null) {
+              return colors(city.filings_2020)
+            }
+            return "none";
+          })
+          // When the mouse moves over a feature, show the tooltip.
+          .on('mousemove', showTooltip)
+          // When the mouse moves out of a feature, hide the tooltip.
+          .on('mouseout', hideTooltip);
+
+      });
+      
+      function zoomed() { 
+          svg.selectAll('path').attr('transform', d3.event.transform);
+      }
+
+      const zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', zoomed);
+      svg.call(zoom);
+
+      var tooltip = d3.select(element)
+        .append("div")
+        .attr("class", "tooltip hidden");
+
+      function showTooltip(f) {
+
+        const scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop
+
+        // Get the current mouse position (as integer)
+        var mouse = d3.mouse(d3.select(element).node()).map(
+          function(d) { return parseInt(d); }
+        );
+
+        // Calculate the absolute left and top offsets of the tooltip. If the
+        // mouse is close to the right border of the map, show the tooltip on
+        // the left.
+        var left = Math.min(w - 4 * f.properties.NAMELSAD.length, mouse[0] + 5);
+        var top = scrollTop + mouse[1] + 25;
+
+        var city = cities.find(e => (e.GEOID == f.properties.GEOID && e.week == current_week));
+        var tooltipHTML = "";
+        if(city != null ) {
+          tooltiphtml = "Average weekly evictions: " + 
+            parseFloat(city.filings_avg).toFixed(2)  + 
+            "<br/> Evictions for week " + 
+            weeks[current_week] + 
+            " : " + 
+            city.filings_2020;
+        } else {
+          tooltiphtml = "No data";
+        }
+
+        // Show the tooltip (unhide it) and set the name of the data entry.
+        // Set the position as calculated before.
+        tooltip.classed('hidden', false)
+          .attr("style", "left:" + left + "px; top:" + top + "px;")
+          .html(tooltiphtml);
+      }
+
+      function hideTooltip() {
+        tooltip.classed('hidden', true);
+      }
+    }
+
+    by_weeks_viz("#map");
+    adi_evictions("#map_2");
+
+    </script>
+  </body>
+</html>
