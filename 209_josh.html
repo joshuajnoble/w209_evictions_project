@@ -40,11 +40,17 @@
           /*height:50px;*/
         }
 
+        .ui-slider-handle {
+        	height: 1em;
+        	width: 1em;
+        	top: -0.2em;
+        }
 
         #slider_labels {
           width:600px;
           padding: 0px;
           margin: 0px;
+          font-size: 10px;
           /*height:50px;*/
         }
 
@@ -56,42 +62,73 @@
           position: absolute;
         }
 
-        ul {
-		      text-align: justify;
-    		}
-    		ul:after {
-    		    content: '';
-    		    display: inline-block;
-    		    width: 100%;
-    		}
-    		ul:before {
-    		    content: '';
-    		    display: block;
-    		    margin-top: -1.25em;
-    		}
-    		li {
-    		    display: inline-block;
-    		    margin-right: -.25em;
-    		    position: relative;
-    		    top: 1.25em;
-    		}
+        #slider_labels > ul {
+		    text-align: justify;
+		}
+		#slider_labels > ul:after {
+		    content: '';
+		    display: inline-block;
+		    width: 100%;
+		}
+		#slider_labels > ul:before {
+		    content: '';
+		    display: block;
+		    margin-top: -1.25em;
+		}
+		#slider_labels > li {
+		    display: inline-block;
+		    margin-right: -1.75em;
+		    position: relative;
+		    top: 1.25em;
+		}
 
         #map {
           background-color: white;
-        } 
+          float: left;
+        }
+
+        .map_legend_holder {
+        	width: 1000px;
+        	height: 700px;
+        	background-color: #fff;
+        }
+
+        .map_1_legend {
+        	width:200px;
+        }
+
+        #value {
+        	font-weight: 200;
+        }
 
     </style>
 </head>
   <body>
 
-    <h1>Evictions By Week</h1>
+  	<div>
+    	<h1>Evictions By Week</h1>
+    	<p> When we look at how the eviction moratoriums put in place for the COVID-19 pandemic affected evictions across our three Ohio cities, we can see a distinct difference in how these laws affected evictions. Cincinatti and Columbus used the broader Ohio eviction moratorium regulations, which required that renters show proof that they couldn't pay rent specifically due to COVID-19, while the city of Cleveland simply instituted a blanket ban on evictions from March until late June of 2020. If you look at the immediate aftermath of the moratorium in Cleveland in late June of 2020 you can see the pent-up evictions suddenly all executed at once. </p>
+
+    	<p>This map shows the difference between the average weekly evictions and the evictions for the week selected using the scroller.</p>
+	</div>
     <p id="value">Week of </p>
     <div style="padding:20px;">
     	<div id="slider"></div>
     	<ul id="slider_labels"></ul>
 	  </div>
-    <div id="map"></div>
+	  <div class="map_legend_holder">
+    	<div id="map"></div>
+    	<div id="map_1_legend"></div>
+	  </div>
     <div class="spacer"></div>
+
+    <div>
+    	<h1>The Broadstreet Area Deprivation Index</h1>
+    	<p> The ADI is a validated, measure of social and economic status for neighborhoods. It has been studied for 20 years and been associated with many important health outcomes. The Area Deprivation Index (ADI) is a standardized score with a score of 100 being the mean. Most (over 99%) of communities will fall between a score of 40 to 160. Broadstreet also defines an ADI percentile that is 0 - 100% with 50% indicating a "middle of the nation" percentile.  </p>
+
+    	<p>This map shows the ADI for different parts of Cleveland and the evictions for that area across 2020 and 2021. Clicking on one of the regions will show the evictions for each week during 2020 and 2021. Notice how many of the areas which have a high ADI also will show higher rates of evictions.</p>
+	</div>
+
     <div id="map_2_sidebar"></div>
     <div id="map_2"></div>
 
@@ -298,6 +335,8 @@
             return;
           }
 
+          const scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop
+
           // Get the current mouse position (as integer)
           var mouse = d3.mouse(d3.select('#map').node()).map(
             function(d) { return parseInt(d); }
@@ -307,7 +346,7 @@
           // mouse is close to the right border of the map, show the tooltip on
           // the left.
           var left = Math.min(w - 4 * f.properties.NAMELSAD.length, mouse[0] + 5);
-          var top = mouse[1] + 25;
+          var top = mouse[1] + 300;
           
           var cb = adi.find(e => (e.geoid2 == f.properties.GEOID));
           var evictions = evictions_by_geoid.find(e => (e.geoid == cb.tract));
@@ -334,7 +373,7 @@
 
     }
 
-    function by_weeks_viz(element)
+    function by_weeks_viz(element, legend)
     {
 
       //Width and height
@@ -362,16 +401,61 @@
       var cities = null;
       var weeks = [];
 
+      var colors_for_legend = [{label:"Below Average", color:"#0D0887"}, 
+						      {label:"100% of Average", color:"#7E03A8"}, 
+						      {label:"200% of Average", color:"#CC4778"}, 
+						      {label:"300% of Average", color:"#F89540"}, 
+						      {label:"> 300% of Average", color:"#FDC527"}];
+
+
+      var legend = d3.select(legend)
+                  .append("svg").attr("width", 200)
+                  .attr("height", 500);
+	  
+		// Add one dot in the legend for each name.
+		legend.selectAll("mydots")
+		  .data(colors_for_legend)
+		  .enter()
+		  .append("circle")
+		    .attr("cx", 10)
+		    .attr("cy", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+		    .attr("r", 7)
+		    .style("fill", function(d){ return d.color})
+
+		// Add one dot in the legend for each name.
+		legend.selectAll("mylabels")
+		  .data(colors_for_legend)
+		  .enter()
+		  .append("text")
+		    .attr("x", 20)
+		    .attr("font-size", 12)
+		    .attr("y", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+		    .style("fill", function(d){ return d.color})
+		    .text(function(d){ return d.label})
+		    .attr("text-anchor", "left")
+		    .style("alignment-baseline", "middle")
+
+      function week_formatter(date) {
+      	console.log(" clling week formatter ");
+      	var d = new Date(date);
+      	var month = d.toLocaleString('default', { month: 'short' });
+      	return month.toString() + " " + d.getFullYear().toString().substring(2,4);
+      }
+
       d3.csv("data/cities_weekly_2020_2021.csv").then(res => {
         cities = res;
         weeks = [... new Set(cities.map(data => data.week_date))]
         console.log(weeks);
 
+        ////////////////////////////////////////////////////////////////////
+        // build the slidr
+        ////////////////////////////////////////////////////////////////////
+
         $( function() {
   		    $( "#slider" ).slider({
   		    	height:50,
   		    	width:800,
-  					min: 0,
+  					min: 1,
   					max: weeks.length,
   					slide: function (event, ui) {
   						svg.selectAll("path")
@@ -386,7 +470,7 @@
   						        }
   							}
   						);
-  						d3.select('#value').text("Week number: " + weeks[ui.value]);
+  						d3.select('#value').text("Week of " + weeks[ui.value]);
   						current_week = ui.value;
   					}
   			  })
@@ -400,14 +484,15 @@
   				    // Position the labels
   				    for (var i = 0; i <= vals; i+=5) {
   				        // Create a new element and position it with percentages
-  				        var el = $('<li>' + (i + opt.min) + '</li>').css('left', (i/vals*100) + '%');
+  				        var el = $('<li>' + week_formatter(weeks[(i + opt.min)]) + '</li>').css('left', (i/vals*100) + '%');
   				        // Add the element inside #slider
   				        $("#slider_labels").append(el);
 
   				    }
 
   				});
-  	    });
+  	    	});
+        	d3.select('#value').text("Week of " + weeks[1]);
       });
 
       var ohio_json = {};
@@ -442,13 +527,28 @@
           .attr("d", path)
           .attr("stroke", function(d,i) {
             var geoid = d.properties.GEOID;
+
+            // is it the outline of the state?
+            if(geoid == "0400000US39") {
+            	return "#999999";
+            }
+
             var city = cities.find(e => (e.GEOID == geoid && e.week == current_week));
             if(city != null) {
               return "dimgray"
             }
             return "none";
           })
-          .attr("stroke-width","0.1")
+          .attr("stroke-width",function(d,i) {
+          	var geoid = d.properties.GEOID;
+
+            // is it the outline of the state?
+            if(geoid == "0400000US39") {
+            	return "1.0";
+            } else {
+            	return "0.1";
+            }
+          })
           .attr("fill", function(d,i) {
             var geoid = d.properties.GEOID;
             var city = cities.find(e => (e.GEOID == geoid && e.week == current_week));
@@ -461,7 +561,6 @@
           .on('mousemove', showTooltip)
           // When the mouse moves out of a feature, hide the tooltip.
           .on('mouseout', hideTooltip);
-
       });
       
       function zoomed() { 
@@ -515,7 +614,7 @@
       }
     }
 
-    by_weeks_viz("#map");
+    by_weeks_viz("#map", "#map_1_legend");
     adi_evictions("#map_2");
 
     </script>
