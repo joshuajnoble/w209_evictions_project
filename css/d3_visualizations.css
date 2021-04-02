@@ -1,0 +1,77 @@
+.d3tooltip {
+  font-weight: bold;
+  padding: 0.2rem;
+  position: absolute;
+  border: 1px solid silver;
+  background-color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+#slider {
+  width:760px;
+  /*height:50px;*/
+}
+
+.ui-slider-handle {
+	height: 1em;
+	width: 1em;
+	top: -0.2em;
+}
+
+#slider_labels {
+  width:600px;
+  padding: 0px;
+  margin: 0px;
+  font-size: 10px;
+  /*height:50px;*/
+}
+
+.spacer {
+  padding-top: 20px;
+}
+
+#map_2_sidebar {
+  position: absolute;
+}
+
+#slider_labels > ul {
+  text-align: justify;
+}
+#slider_labels > ul:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+}
+#slider_labels > ul:before {
+    content: '';
+    display: block;
+    margin-top: -1.25em;
+}
+#slider_labels > li {
+    display: inline-block;
+    margin-right: -1.75em;
+    position: relative;
+    top: 1.25em;
+}
+
+#map {
+  background-color: white;
+  float: left;
+}
+
+.map_legend_holder {
+	width: 1000px;
+	height: 700px;
+	background-color: #fff;
+}
+
+.map_1_legend {
+	width:200px;
+}
+
+#value {
+	font-weight: 200;
+}

@@ -259,12 +259,56 @@
     <section id="covid" class="services">
       <div class="container" data-aos="fade-up">
 
+
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
+        <script src="https://d3js.org/d3-array.v2.min.js"></script>
+        <script src="../js/d3_visualizations.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="../css/d3_visualizations.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
         <div class="section-title">
-          <h2>Past</h2>
+          <h2>Present</h2>
           <h3>Explore <span>Pandemic</span> Data</h3>
           <p>Explore and Compare evictions across counties and census tracts during the Covid-19 Pandemic</p>
         </div>
 
+        <div>
+      <h1>Evictions By Week</h1>
+      <p> When we look at how the eviction moratoriums put in place for the COVID-19 pandemic affected evictions across our three Ohio cities, we can see a distinct difference in how these laws affected evictions. Cincinatti and Columbus used the broader Ohio eviction moratorium regulations, which required that renters show proof that they couldn't pay rent specifically due to COVID-19, while the city of Cleveland simply instituted a blanket ban on evictions from March until late June of 2020. If you look at the immediate aftermath of the moratorium in Cleveland in late June of 2020 you can see the pent-up evictions suddenly all executed at once. </p>
+
+      <p>This map shows the difference between the average weekly evictions and the evictions for the week selected using the scroller.</p>
+  </div>
+    <p id="value">Week of </p>
+    <div style="padding:20px;">
+      <div id="slider"></div>
+      <ul id="slider_labels"></ul>
+    </div>
+    <div class="map_legend_holder">
+      <div id="map"></div>
+      <div id="map_1_legend"></div>
+    </div>
+    <div class="spacer"></div>
+
+    <div>
+      <h1>The Broadstreet Area Deprivation Index</h1>
+      <p> The ADI is a validated, measure of social and economic status for neighborhoods. It has been studied for 20 years and been associated with many important health outcomes. The Area Deprivation Index (ADI) is a standardized score with a score of 100 being the mean. Most (over 99%) of communities will fall between a score of 40 to 160. Broadstreet also defines an ADI percentile that is 0 - 100% with 50% indicating a "middle of the nation" percentile.  </p>
+
+      <p>This map shows the ADI for different parts of Cleveland and the evictions for that area across 2020 and 2021. Clicking on one of the regions will show the evictions for each week during 2020 and 2021. Notice how many of the areas which have a high ADI also will show higher rates of evictions.</p>
+  </div>
+
+    <div id="map_2_sidebar"></div>
+    <div id="map_2"></div>
+
+    <script type="text/javascript">
+
+    by_weeks_viz("#map", "#map_1_legend");
+    adi_evictions("#map_2");
+
+    </script>
 		      
       </div>
     </section><!-- End Covid Data Section -->
