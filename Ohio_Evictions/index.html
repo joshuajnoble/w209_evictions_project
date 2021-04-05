@@ -50,25 +50,15 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">Intro</a></li>
-          <li><a class="nav-link scrollto" href="#past">Explore Previous Data</a></li>
-          <li><a class="nav-link scrollto " href="#covid">Explore Covid Data</a></li>
-          <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <!-- <li><a class="nav-link scrollto" href="#past">Explore Previous Data</a></li> -->
+          <li class="dropdown"><a href="#past"><span>Explore Previous Data</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="#past">Explore Ohio Census Tracts</a></li>
+              <li><a href="#past2">Explore Demographics</a></li>
+              <li><a href="#past3">Identify Correlating Factors</a></li>
             </ul>
-          </li> -->
+          </li>
+		  <li><a class="nav-link scrollto " href="#covid">Explore Covid Data</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -197,7 +187,7 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
-              <i class="bi bi-emoji-smile"></i>
+              <i class="bi bi-geo"></i>
               <span data-purecounter-start="0" data-purecounter-end="2952" data-purecounter-duration="1" class="purecounter"></span>
               <p>Census Tracts</p>
             </div>
@@ -205,7 +195,7 @@
 
           <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
             <div class="count-box">
-              <i class="bi bi-journal-richtext"></i>
+              <i class="bi bi-clock-history"></i>
               <span data-purecounter-start="0" data-purecounter-end="17" data-purecounter-duration="1" class="purecounter"></span>
               <p>Years from 2000 - 2016</p>
             </div>
@@ -213,7 +203,7 @@
 
           <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
-              <i class="bi bi-headset"></i>
+              <i class="bi bi-house"></i>
               <span data-purecounter-start="0" data-purecounter-end="861358" data-purecounter-duration="1" class="purecounter"></span>
               <p>Total Evictions</p>
             </div>
@@ -221,14 +211,15 @@
 
           <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
-              <i class="bi bi-people"></i>
+              <i class="bi bi-house-fill"></i>
               <span data-purecounter-start="0" data-purecounter-end="1632921" data-purecounter-duration="1" class="purecounter"></span>
               <p>Total Eviction Filings</p>
             </div>
           </div>
 
         </div>
-
+		<br>
+		<p> If you have questions about the data or terminology, please refer to: <a href="https://evictionlab.org/help-faq/">Help & FAQ on EvictionLab</a>.
       </div>
     </section><!-- End Counts Section -->
 
@@ -240,16 +231,21 @@
         <div class="section-title">
           <h2>Past</h2>
           <h3>Explore <span>Previous</span> Data</h3>
-          <p>Explore and Compare evictions across counties and census tracts</p>
+          <p>Explore and compare evictions across counties and census tracts</p>
         </div>
 		<p>Compare evictions across counties and Census tracts<p>
 		<iframe width="100%" height="695" frameborder="0"
 		  src="https://observablehq.com/embed/cbbe36e57eb5c2e0?cells=viewof+attr%2Cchart%2Cstyle"></iframe>
 
+  		 <div id="past2">
+  		<p>Identify counties or census tracts</p>
+  		</div>
+
+		 <div id="past3">
 		<p>Identify correlating factors with evictions </p>
 		<iframe width="100%" height="1138" frameborder="0"
 		  src="https://observablehq.com/embed/1745ec58fd5c7ad0?cells=viewof+filter2%2Cviewof+filter%2Cviewof+xAttr%2Cviewof+yAttr%2Cchart"></iframe>
-		
+		</div>
 		      
 		      
       </div>
