@@ -125,7 +125,7 @@ function adi_evictions(element)
 
       d3.select("#map_2_sidebar").selectAll('*').remove();
 
-      var header = d3.select("#map_2_sidebar").append("p").text("Census Block: " + f.properties.GEOID);
+      var header = d3.select("#map_2_sidebar").append("p").text("Census Block: " + f.properties.GEOID + "<br/> Racial Majority: " + cb.racial_majority);
 
       // append the svg object to the body of the page
       var sidebar_svg = d3.select("#map_2_sidebar")
