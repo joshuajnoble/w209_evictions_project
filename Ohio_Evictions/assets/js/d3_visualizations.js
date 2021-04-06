@@ -1,13 +1,13 @@
 function adi_evictions(element)
 {
   //Width and height
-    var w = 900;
+    var w = 800;
     var h = 700;
 
     //Define map projection
     var projection = d3.geoMercator()
                             .center([ -81.681290, 41.505493 ])
-                            .scale([ 40 * w ])
+                            .scale([ 45 * w ])
                             .translate([ w/2, h/2 ]);
                           
     // Define nicer colors
@@ -49,7 +49,7 @@ function adi_evictions(element)
         d => d.GEOID
       ).map(([k, v]) => ({ geoid: k, average_filings: v }))
 
-     console.log(evictions_by_geoid);
+     //console.log(evictions_by_geoid);
     });
 
     var ohio_json = {};
@@ -125,6 +125,8 @@ function adi_evictions(element)
 
       d3.select("#map_2_sidebar").selectAll('*').remove();
 
+      var header = d3.select("#map_2_sidebar").append("p").text("Census Block: " + f.properties.GEOID);
+
       // append the svg object to the body of the page
       var sidebar_svg = d3.select("#map_2_sidebar")
         .append("svg")
@@ -151,32 +153,29 @@ function adi_evictions(element)
 
         x_axis.selectAll("text")  
           .style("text-anchor", "end")
-          .style("color", "#ccc")
+          .style("color", "#000")
           .attr("dx", "-.8em")
           .attr("dy", ".15em")
           .attr("transform", "rotate(-65)" );
 
       // Add Y axis
       var y = d3.scaleLinear()
-        //.domain([0, d3.max(cb_data, function(d) { return +d.filings; })])
         .domain([0, 15])
         .range([ height, 0 ]);
-      var y_axis = sidebar_svg.append("g")
-        .call(d3.axisLeft(y));
+      var y_axis = sidebar_svg.append("g").call(d3.axisLeft(y));
 
-        y_axis.selectAll("text")  
-        .style("color", "#ccc");
+      y_axis.selectAll("text").style("color", "#000");
 
-      x_axis.selectAll("line").style("stroke","#ccc");
-      x_axis.selectAll("path").style("stroke","#ccc");
-      y_axis.selectAll("line").style("stroke","#ccc");
-      y_axis.selectAll("path").style("stroke","#ccc");
+      x_axis.selectAll("line").style("stroke","#000");
+      x_axis.selectAll("path").style("stroke","#000");
+      y_axis.selectAll("line").style("stroke","#000");
+      y_axis.selectAll("path").style("stroke","#000");
 
       // Add the line
       sidebar_svg.append("path")
         .datum(cb_data)
         .attr("fill", "none")
-        .attr("stroke", "white")
+        .attr("stroke", "black")
         .attr("stroke-width", 1.5)
         .attr("d", d3.line()
           .x(function(d) { return x(d.date) })
@@ -210,7 +209,7 @@ function adi_evictions(element)
       // mouse is close to the right border of the map, show the tooltip on
       // the left.
       var left = Math.min(w - 4 * f.properties.NAMELSAD.length, mouse[0] + 5);
-      var top = mouse[1] + (scrollTop/10);
+      var top = mouse[1] + (scrollTop/12);
       
       var cb = adi.find(e => (e.geoid2 == f.properties.GEOID));
       var evictions = evictions_by_geoid.find(e => (e.geoid == cb.tract));
@@ -242,7 +241,7 @@ function by_weeks_viz(element, legend)
 
   //Width and height
   var w = 800;
-  var h = 700;
+  var h = 600;
 
   //Define map projection
   var projection = d3.geoMercator()
@@ -251,7 +250,7 @@ function by_weeks_viz(element, legend)
                           .translate([ w/2, h/2 ]);
                         
   // Define nicer colors
-  var colors = d3.scaleSequential(d3.interpolatePlasma).domain([0, 8])
+  var colors = d3.scaleSequential(d3.interpolatePlasma).domain([0, 6])
 
   //Define path generator
   var path = d3.geoPath().projection(projection);
@@ -272,32 +271,30 @@ function by_weeks_viz(element, legend)
 				      {label:"> 300% of Average", color:"#FDC527"}];
 
 
-  var legend = d3.select(legend)
-              .append("svg").attr("width", 200)
-              .attr("height", 500);
+  var legend = d3.select(legend).append("svg").attr("width", 200).attr("height", 500);
 
-// Add one dot in the legend for each name.
-legend.selectAll("mydots")
-  .data(colors_for_legend)
-  .enter()
-  .append("circle")
-    .attr("cx", 10)
-    .attr("cy", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
-    .attr("r", 7)
-    .style("fill", function(d){ return d.color})
+  // Add one dot in the legend for each name.
+  legend.selectAll("mydots")
+    .data(colors_for_legend)
+    .enter()
+    .append("circle")
+      .attr("cx", 10)
+      .attr("cy", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+      .attr("r", 7)
+      .style("fill", function(d){ return d.color})
 
-// Add one dot in the legend for each name.
-legend.selectAll("mylabels")
-  .data(colors_for_legend)
-  .enter()
-  .append("text")
-    .attr("x", 20)
-    .attr("font-size", 12)
-    .attr("y", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
-    .style("fill", function(d){ return d.color})
-    .text(function(d){ return d.label})
-    .attr("text-anchor", "left")
-    .style("alignment-baseline", "middle")
+  // Add one dot in the legend for each name.
+  legend.selectAll("mylabels")
+    .data(colors_for_legend)
+    .enter()
+    .append("text")
+      .attr("x", 20)
+      .attr("font-size", 12)
+      .attr("y", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+      .style("fill", function(d){ return d.color})
+      .text(function(d){ return d.label})
+      .attr("text-anchor", "left")
+      .style("alignment-baseline", "middle");
 
   function week_formatter(date) {
   	var d = new Date(date);
@@ -326,7 +323,7 @@ legend.selectAll("mylabels")
 					        var geoid = d.properties.GEOID;
 					        var city = cities.find(e => (e.GEOID == geoid && e.week == ui.value));
 					        if(city != null) {
-					        	return colors(city.filings_2020)
+					        	return colors(city.filings_2020 / Math.max(1.0, city.filings_avg))
 					        } else {
 					        	return "none";
 					        }
@@ -349,10 +346,9 @@ legend.selectAll("mylabels")
 			        var el = $('<li>' + week_formatter(weeks[(i + opt.min)]) + '</li>').css('left', (i/vals*100) + '%');
 			        // Add the element inside #slider
 			        $("#slider_labels").append(el);
+			     }
 
-			    }
-
-			});
+			   });
     	});
     	d3.select('#value').text("Week of " + weeks[1]);
   });
@@ -441,8 +437,8 @@ legend.selectAll("mylabels")
     // const scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : 
     //   (document.documentElement || document.body.parentNode || document.body).scrollTop
 
-    var scrollTop = $(window).scrollTop() / 8;
-    console.log(scrollTop);
+    var scrollTop = $(window).scrollTop() / 12;
+    //console.log(scrollTop);
 
     // Get the current mouse position (as integer)
     var mouse = d3.mouse(d3.select(element).node()).map(
