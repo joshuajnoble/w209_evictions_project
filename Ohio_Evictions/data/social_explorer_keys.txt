@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
-Codebook for Social Explorer report ID: R12795595
+Codebook for Social Explorer report ID: R12795655
 --------------------------------------------------------------------------------
 
 Contents
@@ -114,6 +114,100 @@ Tables:
             B18002_003:      50 percent or More
 
 
+      10. Ratio of Income in 2019 to Poverty Level
+          Universe:  Population for whom poverty status Is determined
+          Name:      A13004
+          Variables:
+             A13004_001:   Population for Whom Poverty Status Is Determined:
+             A13004_002:      Under .50
+             A13004_003:      .50 to .74
+             A13004_004:      .75 to .99
+             A13004_005:      1.00 to 1.49
+             A13004_006:      1.50 to 1.99
+             A13004_007:      2.00 and Over
+
+
+      11. Poverty Status in the Past 12 Months (White Alone)
+          Universe:  White Alone Population for whom poverty status Is determined
+          Name:      A13001A
+          Variables:
+             A13001A_001:   White Alone Population for Whom Poverty Status Is  Determined:
+             A13001A_002:      Income Below Poverty Level
+             A13001A_003:      Income At or Above Poverty Level
+
+
+      12. Poverty Status in the Past 12 Months (Black or African American Alone)
+          Universe:  Black or African American Alone Population for whom poverty status Is determined
+          Name:      A13001B
+          Variables:
+             A13001B_001:   Black or African American Alone Population for  Whom Poverty Status Is Determined:
+             A13001B_002:      Income Below Poverty Level
+             A13001B_003:      Income At or Above Poverty Level
+
+
+      13. Poverty Status in the Past 12 Months (American Indian and Alaska Native Alone)
+          Universe:  American Indian and Alaska Native Alone Population for whom poverty status Is determined
+          Name:      A13001C
+          Variables:
+             A13001C_001:   American Indian and Alaska Native Alone  Population for Whom Poverty Status Is Determined:
+             A13001C_002:      Income Below Poverty Level
+             A13001C_003:      Income At or Above Poverty Level
+
+
+      14. Poverty Status in the Past 12 Months (Asian Alone)
+          Universe:  Asian Alone Population for whom poverty status Is determined
+          Name:      A13001D
+          Variables:
+             A13001D_001:   Asian Alone Population for Whom Poverty Status Is  Determined:
+             A13001D_002:      Income Below Poverty Level
+             A13001D_003:      Income At or Above Poverty Level
+
+
+      15. Poverty Status in the Past 12 Months (Native Hawaiian and Other Pacific Islander Alone)
+          Universe:  Native Hawaiian and Other Pacific Islander Alone Population for whom poverty status Is determined
+          Name:      A13001E
+          Variables:
+             A13001E_001:   Native Hawaiian and Other Pacific Islander Alone  Population for Whom Poverty Status Is Determined:
+             A13001E_002:      Income Below Poverty Level
+             A13001E_003:      Income At or Above Poverty Level
+
+
+      16. Poverty Status in the Past 12 Months (Some Other Race Alone)
+          Universe:  Some Other Race Alone Population for whom poverty status Is determined
+          Name:      A13001F
+          Variables:
+             A13001F_001:   Some Other Race Alone Population for Whom Poverty  Status Is Determined:
+             A13001F_002:      Income Below Poverty Level
+             A13001F_003:      Income At or Above Poverty Level
+
+
+      17. Poverty Status in the Past 12 Months (Two or More Races)
+          Universe:  Two or More races Population for whom poverty status Is determined
+          Name:      A13001G
+          Variables:
+             A13001G_001:   Two or More Races Population for Whom Poverty  Status Is Determined:
+             A13001G_002:      Income Below Poverty Level
+             A13001G_003:      Income At or Above Poverty Level
+
+
+      18. Poverty Status in the Past 12 Months (Hispanic or Latino)
+          Universe:  Hispanic or Latino Population for whom poverty status Is determined
+          Name:      A13001H
+          Variables:
+             A13001H_001:   Hispanic or Latino Population for Whom Poverty  Status Is Determined:
+             A13001H_002:      Income Below Poverty Level
+             A13001H_003:      Income At or Above Poverty Level
+
+
+      19. Poverty Status in the Past 12 Months (White Alone, Not Hispanic or Latino)
+          Universe:  White Alone, not Hispanic or Latino Population for whom poverty status Is determined
+          Name:      A13001I
+          Variables:
+             A13001I_001:   White Alone, Not Hispanic or Latino Population  for Whom Poverty Status Is Determined:
+             A13001I_002:      Income Below Poverty Level
+             A13001I_003:      Income At or Above Poverty Level
+
+
 
 
 
@@ -126,6 +220,7 @@ Data Dictionary
  
 Variables 
       FIPS:           FIPS
+      GEOID:          Geographic Identifier
       NAME:           Area Name
       QName:          Qualifying Name
       STUSAB:         State Postal Abbreviation
@@ -175,13 +270,10 @@ Variables
       PCI:            Principal City Indicator
       TAZ:            Traffic Analysis Zone
       UGA:            Urban Growth Area
-      PUMA5:          Public Use Microdata Area - 5% File
-      PUMA1:          Public Use Microdata Area - 1% File
-      GEOID:          Geographic Identifier
       BTTR:           Tribal Tract
       BTBG:           Tribal Block Group
-      AREALAND:       Area (Land)
-      AREAWATR:       Area (Water)
+      PUMA5:          Public Use Microdata Area - 5% File
+      PUMA1:          Public Use Microdata Area - 1% File
       A00001_001:     Total Population
       A00002_001:     Total Population
       A00002_002:     Population Density (Per Sq. Mile)
@@ -226,6 +318,40 @@ Variables
       B18002_001:     Renter-Occupied Housing Units
       B18002_002:     Renter-Occupied Housing Units: 30 to 49 Percent
       B18002_003:     Renter-Occupied Housing Units: 50 percent or More
+      A13004_001:     Population for Whom Poverty Status Is Determined:
+      A13004_002:     Population for Whom Poverty Status Is Determined: Under .50
+      A13004_003:     Population for Whom Poverty Status Is Determined: .50 to .74
+      A13004_004:     Population for Whom Poverty Status Is Determined: .75 to .99
+      A13004_005:     Population for Whom Poverty Status Is Determined: 1.00 to 1.49
+      A13004_006:     Population for Whom Poverty Status Is Determined: 1.50 to 1.99
+      A13004_007:     Population for Whom Poverty Status Is Determined: 2.00 and Over
+      A13001A_001:    White Alone Population for Whom Poverty Status Is  Determined:
+      A13001A_002:    White Alone Population for Whom Poverty Status Is  Determined: Income Below Poverty Level
+      A13001A_003:    White Alone Population for Whom Poverty Status Is  Determined: Income At or Above Poverty Level
+      A13001B_001:    Black or African American Alone Population for  Whom Poverty Status Is Determined:
+      A13001B_002:    Black or African American Alone Population for  Whom&nbsp; Poverty Status Is Determined: Income Below Poverty Level
+      A13001B_003:    Black or African American Alone Population for  Whom&nbsp; Poverty Status Is Determined: Income At or Above Poverty Level
+      A13001C_001:    American Indian and Alaska Native Alone  Population for Whom Poverty Status Is Determined:
+      A13001C_002:    American Indian and Alaska Native Alone  Population For&nbsp; Whom Poverty Status Is Determined: Income Below Poverty Level
+      A13001C_003:    American Indian and Alaska Native Alone  Population For&nbsp; Whom Poverty Status Is Determined: Income At or Above Poverty Level
+      A13001D_001:    Asian Alone Population for Whom Poverty Status Is  Determined:
+      A13001D_002:    Asian Alone Population for Whom Poverty Status Is  Determined: Income Below Poverty Level
+      A13001D_003:    Asian Alone Population for Whom Poverty Status Is  Determined: Income At or Above Poverty Level
+      A13001E_001:    Native Hawaiian and Other Pacific Islander Alone  Population for Whom Poverty Status Is Determined:
+      A13001E_002:    Native Hawaiian and Other Pacific Islander Alone &nbsp; Population for Whom Poverty Status Is Determined: Income Below Poverty Level
+      A13001E_003:    Native Hawaiian and Other Pacific Islander Alone &nbsp; Population for Whom Poverty Status Is Determined: Income At or Above Poverty Level
+      A13001F_001:    Some Other Race Alone Population for Whom Poverty  Status Is Determined:
+      A13001F_002:    Some Other Race Alone Population for Whom Poverty  Status Is Determined: Income Below Poverty Level
+      A13001F_003:    Some Other Race Alone Population for Whom Poverty  Status Is Determined: Income At or Above Poverty Level
+      A13001G_001:    Two or More Races Population for Whom Poverty  Status Is Determined:
+      A13001G_002:    Two or More Races Population for Whom Poverty  Status Is Determined: Income Below Poverty Level
+      A13001G_003:    Two or More Races Population for Whom Poverty  Status Is Determined: Income At or Above Poverty Level
+      A13001H_001:    Hispanic or Latino Population for Whom Poverty  Status Is Determined:
+      A13001H_002:    Hispanic or Latino Population for Whom Poverty  Status Is Determined: Income Below Poverty Level
+      A13001H_003:    Hispanic or Latino Population for Whom Poverty  Status Is Determined: Income At or Above Poverty Level
+      A13001I_001:    White Alone, Not Hispanic or Latino Population  for Whom Poverty Status Is Determined:
+      A13001I_002:    White Alone, Not Hispanic or Latino Population  for Whom&nbsp; Poverty Status Is Determined: Income Below Poverty Level
+      A13001I_003:    White Alone, Not Hispanic or Latino Population  for Whom&nbsp; Poverty Status Is Determined: Income At or Above Poverty Level
 
 
 
@@ -246,6 +372,6 @@ accompanying data, subject to the following conditions:
 
 * Citations should also include the URL for this report:
 
-    http://www.socialexplorer.com/pub/reportdata/HtmlResults.aspx?reportid=R12795595
+    http://www.socialexplorer.com/pub/reportdata/HtmlResults.aspx?reportid=R12795655
 
 If you have any questions contact info@socialexplorer.com
