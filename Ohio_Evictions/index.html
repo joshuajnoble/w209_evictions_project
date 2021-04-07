@@ -320,14 +320,42 @@
 
       <p>This map shows the ADI for different parts of Cleveland and the evictions for that area across 2020 and 2021. Clicking on one of the regions will show the evictions for each week during 2020 and 2021. Notice how many of the areas which have a high ADI also will show higher rates of evictions.</p>
   </div>
-
-    <div id="map_2_sidebar"></div>
-    <div id="map_2"></div>
+  <div>
+    <select name="map_2_select" id="map_2_select">
+      <option value="">--select--</option>
+      <option value="renters">Percent of Population Renting</option>
+      <option value="50pct">Households Paying More than 50% of Income in Rent</option>
+      <option value="median">Median Household Income</option>
+      <option value="poverty">Percentage of Population Under Poverty Level</option>
+    </select>
+    <p id="pick"></p>
+    <div>
+      <div id="map_2"></div>
+      <div id="map_2_right">
+        <div id="map_2_legend"></div>
+        <div id="map_2_sidebar"></div>
+      </div>
+    </div>
+  </div>
 
     <script type="text/javascript">
 
     by_weeks_viz("#map", "#map_1_legend");
-    adi_evictions("#map_2");
+    social_explorer_evictions("#map_2", "#map_2_legend", "poverty");
+
+    const element = document.getElementById("map_2_select");
+
+    element.addEventListener("change", (e) => {
+      const value = e.target.value;
+      const text = element.options[element.selectedIndex].text;
+     
+      if (value) {
+        document.getElementById("pick").textContent = `Value Selected: ${value}`;
+        social_explorer_evictions("#map_2", "#map_2_legend", value);
+      } else {
+        document.getElementById("pick").textContent = "";
+      }
+    });
 
     </script>
 		      
