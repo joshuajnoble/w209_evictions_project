@@ -568,9 +568,9 @@ function social_explorer_evictions(element, legend, selection) {
     .translate([w / 2, h / 2]);
 
   var d_domain = [];
-  if(selection == "median") {
+  if (selection == "median") {
     d_domain = [0, 100000]
-  } else if(selection == "renters") {
+  } else if (selection == "renters") {
     d_domain = [0, 1.0]
   } else {
     d_domain = [0, 1.0]
@@ -599,8 +599,8 @@ function social_explorer_evictions(element, legend, selection) {
   d3.csv("data/social_explorer.csv").then(res => {
     social_explorer = res;
     for (record in social_explorer) {
-      social_explorer[record]['fifty_percent_on_rent'] =  Number(social_explorer[record].SE_A18002_005) /  Number(social_explorer[record].SE_A18002_001);
-      social_explorer[record]['renters'] =  Number(social_explorer[record].SE_A10062B_001) /  Number(social_explorer[record].SE_A00001_001);
+      social_explorer[record]['fifty_percent_on_rent'] = Number(social_explorer[record].SE_A18002_005) / Number(social_explorer[record].SE_A18002_001);
+      social_explorer[record]['renters'] = Number(social_explorer[record].SE_A10062B_001) / Number(social_explorer[record].SE_A00001_001);
       var p = Number(social_explorer[record].SE_A13004_002) + Number(social_explorer[record].SE_A13004_003) + Number(social_explorer[record].SE_A13004_004);
       social_explorer[record]['poverty'] = p / Number(social_explorer[record].SE_A13004_001);
     }
@@ -669,12 +669,12 @@ function social_explorer_evictions(element, legend, selection) {
 
         var block = social_explorer.find(e => (e.GEO_FIPS == geoid));
         if (block != null) {
-          
-          if(selection == "renters"){
+
+          if (selection == "renters") {
             return colors(block.renters)
-          } else if(selection == "50pct") {
+          } else if (selection == "50pct") {
             return colors(block.fifty_percent_on_rent)
-          } else if(selection == "median") {
+          } else if (selection == "median") {
             return colors(block.SE_A14006_001)
           } else {
             return colors(block.poverty)
@@ -692,82 +692,82 @@ function social_explorer_evictions(element, legend, selection) {
       // click to show details
       .on('mousedown', showSidebar);
 
-      ////////////////////////////////////////////////////////////////////////
-      // legend
-      ////////////////////////////////////////////////////////////////////////
-      if(selection == "median") {
-        var colors_for_legend = [{
-          label: "$0",
-          color: colors(0)
-        }, {
-          label: "$25000",
-          color: colors(25000)
-        }, {
-          label: "$50000",
-          color: colors(50000)
-        }, {
-          label: "$75000",
-          color: colors(75000)
-        }, {
-          label: "$100000",
-          color: colors(100000)
-        }];
+    ////////////////////////////////////////////////////////////////////////
+    // legend
+    ////////////////////////////////////////////////////////////////////////
+    if (selection == "median") {
+      var colors_for_legend = [{
+        label: "$0",
+        color: colors(0)
+      }, {
+        label: "$25000",
+        color: colors(25000)
+      }, {
+        label: "$50000",
+        color: colors(50000)
+      }, {
+        label: "$75000",
+        color: colors(75000)
+      }, {
+        label: "$100000",
+        color: colors(100000)
+      }];
 
-      } else {
-        var colors_for_legend = [{
-          label: "0%",
-          color: colors(0)
-        }, {
-          label: "25%",
-          color: colors(0.25)
-        }, {
-          label: "50%",
-          color: colors(0.5)
-        }, {
-          label: "75%",
-          color: colors(0.75)
-        }, {
-          label: "100%",
-          color: colors(1.0)
-        }];
+    } else {
+      var colors_for_legend = [{
+        label: "0%",
+        color: colors(0)
+      }, {
+        label: "25%",
+        color: colors(0.25)
+      }, {
+        label: "50%",
+        color: colors(0.5)
+      }, {
+        label: "75%",
+        color: colors(0.75)
+      }, {
+        label: "100%",
+        color: colors(1.0)
+      }];
 
-      }
-    
-      var legend2 = d3.select(legend).append("svg").attr("width", 200).attr("height", 200);
+    }
 
-      // Add one dot in the legend for each name.
-      legend2.selectAll("mydots")
-        .data(colors_for_legend)
-        .enter()
-        .append("rect")
-        .attr("width", 15)
-        .attr("height", 15)
-        .attr("y", function(d, i) {
-          return 75 + i * 25
-        }) // 100 is where the first dot appears. 25 is the distance between dots
-        .attr("x", 10)
-        .style("fill", function(d) {
-          return d.color
-        })
+    var legend2 = d3.select(legend).append("svg").attr("width", 200).attr("height", 200);
 
-      // Add one dot in the legend for each name.
-      legend2.selectAll("mylabels")
-        .data(colors_for_legend)
-        .enter()
-        .append("text")
-        .attr("x", 30)
-        .attr("font-size", 12)
-        .attr("y", function(d, i) {
-          return 84 + i * 25
-        }) // 100 is where the first dot appears. 25 is the distance between dots
-        .style("fill", function(d) {
-          return "#000";
-        })
-        .text(function(d) {
-          return d.label
-        })
-        .attr("text-anchor", "left")
-        .style("alignment-baseline", "middle");
+    // Add one dot in the legend for each name.
+    legend2.selectAll("mydots")
+      .data(colors_for_legend)
+      .enter()
+      .append("rect")
+      .attr("width", 15)
+      .attr("height", 15)
+      .attr("y", function(d, i) {
+        return 75 + i * 25
+      }) // 100 is where the first dot appears. 25 is the distance between dots
+      .attr("x", 10)
+      .style("fill", function(d) {
+        return d.color
+      })
+
+    // Add one dot in the legend for each name.
+    legend2.selectAll("mylabels")
+      .data(colors_for_legend)
+      .enter()
+      .append("text")
+      .attr("x", 30)
+      .attr("font-size", 12)
+      .attr("y", function(d, i) {
+        return 84 + i * 25
+      }) // 100 is where the first dot appears. 25 is the distance between dots
+      .style("fill", function(d) {
+        return "#000";
+      })
+      .text(function(d) {
+        return d.label
+      })
+      .attr("text-anchor", "left")
+      .style("alignment-baseline", "middle");
   });
 
   function zoomed() {
@@ -820,7 +820,7 @@ function social_explorer_evictions(element, legend, selection) {
 
     function get_pct(x, y) {
       var m = Math.round(parseFloat(Number(x) / Number(y)).toFixed(2) * 100);
-      if(isNaN(m)) {
+      if (isNaN(m)) {
         return "N/A";
       } else {
         return m + "%";
@@ -926,7 +926,7 @@ function social_explorer_evictions(element, legend, selection) {
     var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop
 
     // Get the current mouse position (as integer)
-    var mouse = d3.mouse(d3.select('#map').node()).map(
+    var mouse = d3.mouse(d3.select('#map_2').node()).map(
       function(d) {
         return parseInt(d);
       }
@@ -936,11 +936,11 @@ function social_explorer_evictions(element, legend, selection) {
     // mouse is close to the right border of the map, show the tooltip on
     // the left.
     var left = Math.min(w, mouse[0] + 5);
-    var top = mouse[1] + (scrollTop / 13);
+    var top = mouse[1] + (scrollTop / 6);
 
     var cb = social_explorer.find(e => (e.GEO_FIPS == f.properties.GEOID));
 
-    if(!cb) {
+    if (!cb) {
       return;
     }
 
@@ -948,11 +948,11 @@ function social_explorer_evictions(element, legend, selection) {
 
     var tooltip_start = ""
 
-    if(selection == "renters"){
-      tooltip_start = "Renters are " + Math.round(parseFloat(cb.renters).toFixed(2) * 100) + "% of residents"; 
-    } else if(selection == "50pct") {
+    if (selection == "renters") {
+      tooltip_start = "Renters are " + Math.round(parseFloat(cb.renters).toFixed(2) * 100) + "% of residents";
+    } else if (selection == "50pct") {
       tooltip_start = Math.round(parseFloat(cb.fifty_percent_on_rent).toFixed(2) * 100) + "% of residents pay more than half their income in rent"
-    } else if(selection == "median") {
+    } else if (selection == "median") {
       tooltip_start = "The median income here is $" + cb.SE_A14006_001 + "/year";
     } else {
       tooltip_start = Math.round(parseFloat(cb.poverty).toFixed(2) * 100) + "% of residents earn less than the federal poverty limit."
@@ -961,7 +961,7 @@ function social_explorer_evictions(element, legend, selection) {
     //console.log(city);
     var tooltipHTML = "";
     if (evictions != null) {
-      tooltiphtml =  tooltip_start + "<br/> Average Eviction Filings Per Year: " + parseFloat(evictions.average_filings).toFixed(2);
+      tooltiphtml = tooltip_start + "<br/> Average Eviction Filings Per Year: " + parseFloat(evictions.average_filings).toFixed(2);
     } else if (cb != null && cb.area_deprivation_index_percent != "") {
       tooltiphtml = tooltip_start;
     } else {

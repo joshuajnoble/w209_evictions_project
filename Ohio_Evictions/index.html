@@ -284,6 +284,7 @@
         <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
         <script src="https://d3js.org/d3-array.v2.min.js"></script>
         <script src="assets/js/d3_visualizations.js"></script>
+        <script src="assets/js/d3_weekly_by_cities.js"></script>
         <script src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -304,31 +305,43 @@
       <p>This map shows the difference between the average weekly evictions and the evictions for the week selected using the scroller.</p>
   </div>
     <p id="value">Week of </p>
-    <div style="padding:20px;">
+    <div style="padding-bottom:20px;">
+      <div>
+        <p class="moratorium-header">Cleveland Citywide Eviction Moratorium</p>
+        <div class="eviction-moratorium"></div>
+      </div>
       <div id="slider"></div>
       <ul id="slider_labels"></ul>
     </div>
-    <div class="map_legend_holder">
-      <div id="map"></div>
-      <div id="map_1_legend"></div>
+    <div class="map_1_holder">
+      <div class="map-float-left" id="cle_map"></div>
+      <div class="map-float-left" id="col_map"></div>
+      <div class="map-float-left" id="cin_map"></div>
+      <!-- <div id="map"></div> -->
+      <div class="map-float-left" id="map_1_legend"></div>
+    </div>
+    <div class="map_1_label_holder">
+      <div class="label-float-left">Cleveland</div>
+      <div class="label-float-left">Columbus</div>
+      <div class="label-float-left">Cincinnati</div>
+      <!-- <div id="map"></div> -->
+      <div class="map-float-left" id="map_1_legend"></div>
     </div>
     <div class="spacer"></div>
 
     <div>
-      <h1>The Broadstreet Area Deprivation Index</h1>
-      <p> The ADI is a validated, measure of social and economic status for neighborhoods. It has been studied for 20 years and been associated with many important health outcomes. The Area Deprivation Index (ADI) is a standardized score with a score of 100 being the mean. Most (over 99%) of communities will fall between a score of 40 to 160. Broadstreet also defines an ADI percentile that is 0 - 100% with 50% indicating a "middle of the nation" percentile.  </p>
+      <h1>Exploring Demographics And COVID-19 Evictions</h1>
+      <p> </p>
 
-      <p>This map shows the ADI for different parts of Cleveland and the evictions for that area across 2020 and 2021. Clicking on one of the regions will show the evictions for each week during 2020 and 2021. Notice how many of the areas which have a high ADI also will show higher rates of evictions.</p>
+      <p>This map shows several different metrics for the demographics of census tracts in Cleveland and the evictions for that area across 2020 and 2021. Clicking on one of the regions will show the evictions for each week during 2020 and 2021.</p>
   </div>
   <div>
     <select name="map_2_select" id="map_2_select">
-      <option value="">--select--</option>
+      <option value="poverty">Percentage of Population Under Poverty Level</option>
       <option value="renters">Percent of Population Renting</option>
       <option value="50pct">Households Paying More than 50% of Income in Rent</option>
       <option value="median">Median Household Income</option>
-      <option value="poverty">Percentage of Population Under Poverty Level</option>
     </select>
-    <p id="pick"></p>
     <div>
       <div id="map_2"></div>
       <div id="map_2_right">
@@ -340,7 +353,8 @@
 
     <script type="text/javascript">
 
-    by_weeks_viz("#map", "#map_1_legend");
+    // by_weeks_viz("#map", "#map_1_legend");
+    by_weeks_viz_per_city("#cle_map", "#col_map", "#cin_map", "#map_1_legend")
     social_explorer_evictions("#map_2", "#map_2_legend", "poverty");
 
     const element = document.getElementById("map_2_select");
@@ -350,10 +364,7 @@
       const text = element.options[element.selectedIndex].text;
      
       if (value) {
-        document.getElementById("pick").textContent = `Value Selected: ${value}`;
         social_explorer_evictions("#map_2", "#map_2_legend", value);
-      } else {
-        document.getElementById("pick").textContent = "";
       }
     });
 

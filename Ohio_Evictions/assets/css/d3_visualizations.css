@@ -62,14 +62,21 @@
   float: left;
 }
 
-.map_legend_holder {
-	width: 1000px;
-	height: 700px;
+.map_1_holder {
+	width: 1200px;
+	height: 400px;
 	background-color: #fff;
 }
 
+.map_1_label_holder {
+  width: 1200px;
+  height: 50px;
+  background-color: #fff;
+  text-align: center;
+}
+
 .map_1_legend {
-	width:200px;
+	width:120px;
 }
 
 #value {
@@ -133,4 +140,29 @@
 
 #map_2 {
   float:left;
+}
+
+.map-float-left {
+  float:left;
+  padding-right: 5px;
+}
+
+.label-float-left {
+  float:left;
+  width:360px;
+}
+
+.eviction-moratorium {
+  margin-left:150px;
+  width:150px;
+  height:10px;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: none;
+  border-left-style: solid;
+}
+
+.moratorium-header {
+  margin-left:130px;
+  font-size: 11px;
 }
