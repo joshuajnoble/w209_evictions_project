@@ -556,10 +556,28 @@ function by_weeks_viz(element, legend) {
   }
 }
 
-function social_explorer_evictions(element, legend, selection) {
+function social_explorer_evictions(element, legend, selection, city) {
   //Width and height
   var w = 800;
   var h = 700;
+
+  //Define map projection
+  var cin_projection = d3.geoMercator()
+    .center([-84.512016, 39.203119])
+    .scale([100 * w])
+    .translate([w / 2, h / 2]);
+
+  //Define map projection
+  var cle_projection = d3.geoMercator()
+    .center([-81.681290, 41.505493])
+    .scale([100 * w])
+    .translate([w / 2, h / 2]);
+
+  //Define map projection
+  var col_projection = d3.geoMercator()
+    .center([-82.983330, 39.983334])
+    .scale([100 * w])
+    .translate([w / 2, h / 2]);
 
   //Define map projection
   var projection = d3.geoMercator()
@@ -579,11 +597,17 @@ function social_explorer_evictions(element, legend, selection) {
   // Define nicer colors
   var colors = d3.scaleSequential(d3.interpolatePlasma).domain(d_domain);
 
-  //Define path generator
-  var path = d3.geoPath().projection(projection);
+  cities = {
+      'cle':{'projection':cle_projection, 'geojson':"geojson/cleveland_ct.json", 'data':"data/cleveland_weekly_2020_2021.csv"},
+      'col':{'projection':col_projection, 'geojson':"geojson/columbus_ct.json", 'data':"data/columbus_weekly_2020_2021.csv"},
+      'cin':{'projection':cin_projection, 'geojson':"geojson/cincinatti_ct.json", 'data':"data/cincinnati_weekly_2020_2021.csv"}
+    };
 
+  var path = d3.geoPath().projection(cities[city].projection);
+  
   d3.select(element).selectAll("svg").remove();
   d3.select(legend).selectAll("svg").remove();
+  d3.select(element).selectAll(".d3tooltip").remove();
 
   //Create SVG
   var svg = d3.select(element)
@@ -607,7 +631,7 @@ function social_explorer_evictions(element, legend, selection) {
   });
 
   // load our cleveland data
-  d3.csv("data/cleveland_weekly_2020_2021.csv").then(res => {
+  d3.csv(cities[city].data).then(res => {
     //code dealing with data here
     all_data_by_geoid = res;
     evictions_by_geoid = d3.rollups(
@@ -624,7 +648,7 @@ function social_explorer_evictions(element, legend, selection) {
   var current_week = 1;
 
   //Load in GeoJSON data
-  d3.json("geojson/cleveland_ct.json").then(res => {
+  d3.json(cities[city].geojson).then(res => {
 
     ohio_json = res;
     // winding might be bad, fix it
@@ -733,7 +757,7 @@ function social_explorer_evictions(element, legend, selection) {
 
     }
 
-    var legend2 = d3.select(legend).append("svg").attr("width", 200).attr("height", 200);
+    var legend2 = d3.select(legend).append("svg").attr("width", 200).attr("height", 150);
 
     // Add one dot in the legend for each name.
     legend2.selectAll("mydots")
@@ -743,7 +767,7 @@ function social_explorer_evictions(element, legend, selection) {
       .attr("width", 15)
       .attr("height", 15)
       .attr("y", function(d, i) {
-        return 75 + i * 25
+        return 10 + i * 25
       }) // 100 is where the first dot appears. 25 is the distance between dots
       .attr("x", 10)
       .style("fill", function(d) {
@@ -758,7 +782,7 @@ function social_explorer_evictions(element, legend, selection) {
       .attr("x", 30)
       .attr("font-size", 12)
       .attr("y", function(d, i) {
-        return 84 + i * 25
+        return 16 + i * 25
       }) // 100 is where the first dot appears. 25 is the distance between dots
       .style("fill", function(d) {
         return "#000";

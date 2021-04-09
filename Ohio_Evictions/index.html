@@ -336,12 +336,19 @@
       <p>This map shows several different metrics for the demographics of census tracts in Cleveland and the evictions for that area across 2020 and 2021. Clicking on one of the regions will show the evictions for each week during 2020 and 2021.</p>
   </div>
   <div>
-    <select name="map_2_select" id="map_2_select">
-      <option value="poverty">Percentage of Population Under Poverty Level</option>
-      <option value="renters">Percent of Population Renting</option>
-      <option value="50pct">Households Paying More than 50% of Income in Rent</option>
-      <option value="median">Median Household Income</option>
-    </select>
+    <div class="selection_holder">
+      <select name="map_2_select" id="map_2_select">
+        <option value="poverty">Percentage of Population Under Poverty Level</option>
+        <option value="renters">Percent of Population Renting</option>
+        <option value="50pct">Households Paying More than 50% of Income in Rent</option>
+        <option value="median">Median Household Income</option>
+      </select>
+      <select name="map_2_select_city" id="map_2_select_city">
+        <option value="cle">Cleveland</option>
+        <option value="col">Columbus</option>
+        <option value="cin">Cincinnati</option>
+      </select>
+    </div>
     <div>
       <div id="map_2"></div>
       <div id="map_2_right">
@@ -355,16 +362,26 @@
 
     // by_weeks_viz("#map", "#map_1_legend");
     by_weeks_viz_per_city("#cle_map", "#col_map", "#cin_map", "#map_1_legend")
-    social_explorer_evictions("#map_2", "#map_2_legend", "poverty");
+    social_explorer_evictions("#map_2", "#map_2_legend", "poverty", "cle");
 
-    const element = document.getElementById("map_2_select");
+    const metric_select = document.getElementById("map_2_select");
+    const city_select = document.getElementById("map_2_select_city");
 
-    element.addEventListener("change", (e) => {
+    metric_select.addEventListener("change", (e) => {
       const value = e.target.value;
-      const text = element.options[element.selectedIndex].text;
+      const text = metric_select.options[metric_select.selectedIndex].text;
      
       if (value) {
-        social_explorer_evictions("#map_2", "#map_2_legend", value);
+        social_explorer_evictions("#map_2", "#map_2_legend", value, city_select.options[city_select.selectedIndex].value);
+      }
+    });
+
+    city_select.addEventListener("change", (e) => {
+      const value = e.target.value;
+      const text = city_select.options[city_select.selectedIndex].text;
+     
+      if (value) {
+        social_explorer_evictions("#map_2", "#map_2_legend", metric_select.options[metric_select.selectedIndex].value, value);
       }
     });
 

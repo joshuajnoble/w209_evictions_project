@@ -130,7 +130,7 @@
 
 #map_2_legend {
   width:200px;
-   padding-top:20px;
+   min-height: 150px;
 }
 
 #map_2_right {
@@ -165,4 +165,8 @@
 .moratorium-header {
   margin-left:130px;
   font-size: 11px;
+}
+
+.selection_holder {
+  padding-bottom: 10px;
 }
