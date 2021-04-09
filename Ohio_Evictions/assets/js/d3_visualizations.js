@@ -563,8 +563,8 @@ function social_explorer_evictions(element, legend, selection, city) {
 
   //Define map projection
   var cin_projection = d3.geoMercator()
-    .center([-84.512016, 39.203119])
-    .scale([100 * w])
+    .center([-84.502016, 39.203119])
+    .scale([140 * w])
     .translate([w / 2, h / 2]);
 
   //Define map projection
