@@ -48,19 +48,19 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
   var weeks = [];
 
   var colors_for_legend = [{
-    label: "Below Average",
+    label: "Evictions below Average",
     color: "#0D0887"
   }, {
-    label: "100% of Average",
+    label: "Evictions at Average",
     color: "#7E03A8"
   }, {
-    label: "200% of Average",
+    label: "Evictions at 200% of Average",
     color: "#CC4778"
   }, {
-    label: "300% of Average",
+    label: "Evictions at 300% of Average",
     color: "#F89540"
   }, {
-    label: "> 300% of Average",
+    label: "Evictions more than 300% of Average",
     color: "#FDC527"
   }];
 
@@ -132,24 +132,38 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
           width: 800,
           min: 1,
           max: weeks.length,
-          slide: function(event, ui) {
-
+          stop: function(event, ui) {
+            console.log(cities);
             for (s in all_svgs) {
-              console.log(s);
+              var per_city_sum = 0;
               all_svgs[s].selectAll("path")
                 .attr("fill",
                   function(d, i) {
                     var geoid = d.properties.GEOID;
                     var city = cities.find(e => (e.GEOID == geoid && e.week == ui.value));
                     if (city != null) {
+                      per_city_sum += Number(city.filings_2020);
                       return colors(city.filings_2020 / Math.max(1.0, city.filings_avg))
                     } else {
                       return "none";
                     }
                   }
                 );
+                console.log(per_city_sum);
+
+                if(all_svgs[s] == cle_svg) {
+                  console.log("adasdasdasd doing per cities week cle");
+                  d3.select("#cle_evictions_for_week").text(per_city_sum.toString() + " evictions this week");
+                } else if(all_svgs[s] == col_svg) {
+                  console.log("doing per cities week col");
+                  d3.select("#col_evictions_for_week").text(per_city_sum.toString() + " evictions this week");
+                } else {
+                  console.log("doing per cities week cin");
+                  d3.select("#cin_evictions_for_week").text(per_city_sum.toString() + " evictions this week");
+                }
             }
             d3.select('#value').text("Week of " + weeks[ui.value]);
+
             current_week = ui.value;
           }
         })
@@ -202,6 +216,8 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
         }
       });
 
+      var per_city_sum = 0;
+
       //Bind data and create one path per GeoJSON feature
       svg.selectAll("path")
         .data(store_obj.features)
@@ -236,6 +252,7 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
           var geoid = d.properties.GEOID;
           var city = cities.find(e => (e.GEOID == geoid && e.week == current_week));
           if (city != null) {
+            per_city_sum += Number(city.filings_2020);
             return colors(city.filings_2020)
           }
           return "none";
@@ -244,6 +261,18 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
         .on('mousemove', showTooltip)
         // When the mouse moves out of a feature, hide the tooltip.
         .on('mouseout', hideTooltip);
+
+        if(svg == cle_svg) {
+          console.log("doing per cities week cle");
+          d3.select("#cle_evictions_for_week").text(per_city_sum.toString() + " evictions this week");
+        } else if(svg == col_svg) {
+          console.log("doing per cities week col");
+          d3.select("#col_evictions_for_week").text(per_city_sum.toString() + " evictions this week");
+        } else {
+          console.log("doing per cities week cin");
+          d3.select("#cin_evictions_for_week").text(per_city_sum.toString() + " evictions this week");
+        }
+
     });
 
     function zoomed() {
