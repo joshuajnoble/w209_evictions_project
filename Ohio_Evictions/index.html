@@ -49,16 +49,18 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">Intro</a></li>
 		  <li><a class="nav-link scrollto" href="#data">Data Definitions</a></li>
+		  <li><a class="nav-link scrollto" href="#past">Explore Past Map</a></li>
+		  <li><a class="nav-link scrollto" href="#past">Explore Past Scatterplot</a></li>
+		  <li><a class="nav-link scrollto" href="#past4">Explore Past Summary</a></li>
           <!-- <li><a class="nav-link scrollto" href="#past">Explore Previous Data</a></li> -->
-          <li class="dropdown"><a href="#past"><span>Explore Previous Data</span> <i class="bi bi-chevron-down"></i></a>
+          <!-- <li class="dropdown"><a href="#past"><span>Explore Previous Data</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#past">Explore Census Tracts</a></li>
               <li><a href="#past2">Deep Dive on Census Tracts</a></li>
               <li><a href="#past3">Identify Correlating Factors</a></li>
             </ul>
-          </li>
+          </li> -->
 		  <li><a class="nav-link scrollto " href="#covid">Explore Covid Data</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -89,19 +91,11 @@
 
         <div class="section-title">
           <h2>Intro</h2>
-		  <p>"The lack of affordable housing sits at the root of a host of social problems, from poverty and homelessness to educational disparities and health care. That means understanding the eviction crisis is critical to effectively addressing these problems and reducing inequality." - <a href="https://evictionlab.org/">The Eviction Lab</a></p>
-        </div>
+		  
+		  <!-- TODO: Update Guy's Intro Section
+		   -->
+			  <div class='tableauPlaceholder' id='viz1618178056726' style='position: relative'><noscript><a href='#'><img alt='Introduction ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;w2&#47;w209project_v4&#47;Introduction&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='w209project_v4&#47;Introduction' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;w2&#47;w209project_v4&#47;Introduction&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1618178056726');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
 
-        <div class="row">
-          <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
-            <h3>Today, most poor renting families put half or more of their income towards housing costs. </h3>
-            <p class="fst-italic">
-              An eviction happens when a landlord expels tenants from a property that he or she owns. Evictions are landlord-initiated involuntary moves that occur to renters. Most evictions happen when renters cannot or do not pay their rent, but landlords can evict renters for many other reasons too.</p>
- 		  <p>Our goals with this visualization are to provide you an enjoyable experience learning about evictions and other related statistics in the state of Ohio through exploring, comparing, and identifying.</p>
-          </div>
         </div>
 
       </div>
@@ -123,8 +117,10 @@
  		  <p>Explore and compare evictions from the financial crisis in 2009 to 2016</p>
           </div>
 		  <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column" data-aos="fade-up" data-aos-delay="100">
-			  <h3>Enjoy Exploring Pandemic Ohio Evictions Data</h3>
-			  <p>Explore evictions across months during 2020-2021</p>
+			  <h3>Explore how evictions and moratoriums have occurred during the pandemic </h3>
+        <p>See how eviction moratoriums in the three largest cities in Ohio changed evictions for each week of 2020 and 2021</p>
+        <p>Map key demographics for the three largest cities in Ohio: average income, number of renters, number of families, how many households pay more than 50% of their income.</p>
+        <p>Compare demographics and the weekly evictions in the largest cities in Ohio throughout 2020 and 2021.</p>
 		  </div>
         </div>
 
@@ -135,9 +131,9 @@
 
     <!-- ======= Counts Section ======= -->
 	<!---TODO: Add some more evictions stats here? --->
-    <section id="data" class="counts">
-      <div class="container" data-aos="fade-up">
-		  <h2> Our Data</h2>
+   <section id="data" class="counts">
+    <div class="container" data-aos="fade-up">
+	<!--    	  <h2> Our Data</h2>
 		  <p>Our datasets are sourced from <a href="https://evictionlab.org/">The Eviction Lab</a> at Princeton University. This dataset covers:</p>
 		  <br>
 		  <br>
@@ -175,7 +171,7 @@
             </div>
           </div>
 
-        </div>
+        </div> -->
 		<br>
 		<h3>Data Definitions</h3>
 		<ul>
@@ -214,14 +210,10 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Past</h2>
-          <h3>Explore <span>Previous</span> Data</h3>
-		  <br>
-          <h4>Explore and compare evictions across counties and census tracts</h4>
-		  
-  		<br>
-  		<p> Enjoy exploring Ohio evictions and demographic data from the past by county or census tract. </p>
+          <h2>Explore Past on a Map</h2>
+          <h3>Explore and compare evictions across counties and census tracts</h3>
         </div>
+
 	<div class = "setup">
 		<p> <b>How To </b> - 
 			Zoom, hover, click or drag with your mouse. Double click to zoom in and triple click to zoom out. </p>
@@ -255,48 +247,30 @@
 		});
 		</script>
 
-		<br>
-		<br>
-  		 
-		 <div id="past2">
-  		<p>Identify counties or census tracts for follow ups.</p>
-<div class='tableauPlaceholder' id='viz1617465320401' style='position: relative'><noscript><a href='#'>
-<img alt='Ohio Eviction ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;w2&#47;w209_final_project_youngkoung&#47;OhioEviction&#47;1_rss.png' style='border: none' />
-</a></noscript>
-<object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-  <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='w209_final_project_youngkoung&#47;OhioEviction' />
-  <param name='tabs' value='no' /><param name='toolbar' value='yes' />
-  <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;w2&#47;w209_final_project_youngkoung&#47;OhioEviction&#47;1.png' />
-  <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' />
-  <param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' />
-  <param name='display_count' value='yes' />
-  <param name='language' value='en' />
- </object></div>
+	</div>
+  
+    </section><!-- End Section 1 -->
+	
+	
+    <section id="past4" class="services">
+      <div class="container" data-aos="fade-up">
+          <div class="section-title">
+            <h2>Explore Summary of Past Data</h2>
+            <h3>Explore a summary of the past data and compare how it relates to the present</h3>
+          </div>
+	
+    <div>
+      <p>Here is a summary of evictions in Ohio for the past year. We identified demographic factors that are historically related to eviction rates as well as the areas that had high eviction rates. Three cities in Ohio - Cincinnati, Columbus and Cleveland - showed high eviction rates historically. For the three cities, we compared the number of eviction filings in 2020 to the number of average historical filings from 2000 to 2016. This will give us a general idea of how evictions played out during the COVID-19 pandemic.        
 
-  <script type='text/javascript'>
-      var divElement = document.getElementById('viz1617465320401');
-      var vizElement = divElement.getElementsByTagName('object')[0];
-      if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';}
-      else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';}
-      else { vizElement.style.width='100%';vizElement.style.height='927px';}
-      var scriptElement = document.createElement('script');
-      scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-      vizElement.parentNode.insertBefore(scriptElement, vizElement);
-  </script>
-		
-		<br>
-		<div class='tableauPlaceholder' id='viz1617595995046' style='position: relative'><noscript><a href='#'><img alt='Dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;BX&#47;BXRNY28R9&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;BXRNY28R9' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;BX&#47;BXRNY28R9&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1617595995046');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1400px';vizElement.style.height='1027px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1400px';vizElement.style.height='1027px';} else { vizElement.style.width='100%';vizElement.style.height='1477px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-<br>
-		 <div id="past3">
-		<p>Identify correlating factors with evictions </p>
-		<iframe width="100%" height="1138" frameborder="0"
-		  src="https://observablehq.com/embed/1745ec58fd5c7ad0?cells=viewof+filter2%2Cviewof+filter%2Cviewof+xAttr%2Cviewof+yAttr%2Cchart"></iframe>
-		</div>
-		      
+      </p>
+      <div class='tableauPlaceholder' id='viz1618142911322' style='position: relative'><noscript><a href='#'><img alt='Evictions in Ohio ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;w2&#47;w209_final_project_youngkoung&#47;EvictionsinOhio&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='w209_final_project_youngkoung&#47;EvictionsinOhio' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;w2&#47;w209_final_project_youngkoung&#47;EvictionsinOhio&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1618142911322');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1216px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+          
+    <br>		      
 		      
       </div>
-    </section><!-- End Past Data Section -->
-	
+	</div>
+  
+    </section><!-- End Section 4 -->	
     <!-- ======= Explore Covid Data Section ======= -->
     <section id="covid" class="services">
       <div class="container" data-aos="fade-up">
@@ -326,7 +300,7 @@
       <p>This map shows the difference between the average weekly evictions and the evictions for the week selected using the scroller.</p>
   </div>
     <p id="value">Week of </p>
-    <div style="padding-bottom:20px;">
+    <div style="padding-bottom:20px;padding-left:15%;">
       <div>
         <p class="moratorium-header">Cleveland Citywide Eviction Moratorium</p>
         <div class="eviction-moratorium"></div>
@@ -359,7 +333,7 @@
       <h1>Exploring Demographics And COVID-19 Evictions</h1>
       <p> </p>
 
-      <p>This map shows several different metrics for the demographics of census tracts in Cleveland and the evictions for that area across 2020 and 2021. Clicking on one of the regions will show the evictions for each week during 2020 and 2021.</p>
+      <p>This map shows several different demographic metrics for census tracts in Cleveland, Columbus, and Cincinnati, and the evictions for that area across 2020 and 2021. Clicking on one of the regions will show the evictions for each week during 2020 and 2021 as well as key demographic data for the census tract.</p>
   </div>
   <div>
     <div class="selection_holder">
