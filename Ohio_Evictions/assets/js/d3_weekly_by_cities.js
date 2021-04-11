@@ -23,7 +23,8 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
     .translate([w / 2, h / 2]);
 
   // Define nicer colors
-  var colors = d3.scaleSequential(d3.interpolatePlasma).domain([0, 6])
+  //var colors = d3.scaleSequential(d3.interpolatePlasma).domain([0, 6])
+  var colors = d3.scaleSequential(d3.interpolateOranges).domain([0, 6])
 
   //Create SVG
   var cle_svg = d3.select(cle_element)
@@ -49,19 +50,19 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
 
   var colors_for_legend = [{
     label: "Below Yearly Average",
-    color: "#0D0887"
+    color:"#FFF3E8"//color: "#0D0887"
   }, {
     label: "At Yearly Average",
-    color: "#7E03A8"
+    color:"#FDD3A9"//color: "#7E03A8"
   }, {
     label: "200% of Yearly Average",
-    color: "#CC4778"
+    color:"#FDA159"//color: "#CC4778"
   }, {
     label: "300% of Yearly Average",
-    color: "#F89540"
+    color:"#E95F0F"//color: "#F89540"
   }, {
     label: ">300% of Yearly Average",
-    color: "#FDC527"
+    color:"#A83703"//color: "#FDC527"
   }];
 
 
@@ -91,9 +92,10 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
     .attr("y", function(d, i) {
       return 100 + i * 25
     }) // 100 is where the first dot appears. 25 is the distance between dots
-    .style("fill", function(d) {
-      return d.color
-    })
+    // .style("fill", function(d) {
+    //   return d.color
+    // })
+    .style("fill", "#000000")
     .text(function(d) {
       return d.label
     })
@@ -312,14 +314,15 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
         left += 500;
       } 
 
-      var top = scrollTop + mouse[1] + 25;
+      var top = scrollTop + mouse[1];
 
       var city = cities.find(e => (e.GEOID == f.properties.GEOID && e.week == current_week));
       var tooltipHTML = "";
       if (city != null) {
-        tooltiphtml = "Average weekly evictions: " +
+        tooltiphtml = "<b>Census Tract</b>: " + city.GEOID + "<br/>" +
+          "<b>Average weekly evictions</b>: " +
           parseFloat(city.filings_avg).toFixed(2) +
-          "<br/> Evictions for week " +
+          "<br/> <b>Evictions for week</b> " +
           weeks[current_week] +
           " : " +
           city.filings_2020;
