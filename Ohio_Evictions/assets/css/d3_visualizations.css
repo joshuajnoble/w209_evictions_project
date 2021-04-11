@@ -78,11 +78,14 @@
 }
 
 .map_1_legend {
-	width:120px;
+	width:15 0px;
 }
 
 #value {
-	font-weight: 200;
+	font-weight: 800;
+  float: left;
+    align-content: center;
+    padding-top: 36px;
 }
 
 /* Dropdown Button */

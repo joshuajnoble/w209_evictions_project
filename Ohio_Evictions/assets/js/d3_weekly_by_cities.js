@@ -7,7 +7,7 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
   //Define map projection
   var cin_projection = d3.geoMercator()
     .center([-84.512016, 39.203119])
-    .scale([100 * w])
+    .scale([90 * w])
     .translate([w / 2, h / 2]);
 
   //Define map projection
