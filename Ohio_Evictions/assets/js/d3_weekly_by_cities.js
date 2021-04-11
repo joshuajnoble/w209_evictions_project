@@ -48,24 +48,24 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
   var weeks = [];
 
   var colors_for_legend = [{
-    label: "Evictions below Average",
+    label: "Below Yearly Average",
     color: "#0D0887"
   }, {
-    label: "Evictions at Average",
+    label: "At Yearly Average",
     color: "#7E03A8"
   }, {
-    label: "Evictions at 200% of Average",
+    label: "200% of Yearly Average",
     color: "#CC4778"
   }, {
-    label: "Evictions at 300% of Average",
+    label: "300% of Yearly Average",
     color: "#F89540"
   }, {
-    label: "Evictions more than 300% of Average",
+    label: ">300% of Yearly Average",
     color: "#FDC527"
   }];
 
 
-  var legend = d3.select(legend).append("svg").attr("width", 120).attr("height", 240);
+  var legend = d3.select(legend).append("svg").attr("width", 160).attr("height", 240);
 
   // Add one dot in the legend for each name.
   legend.selectAll("mydots")
