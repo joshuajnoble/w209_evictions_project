@@ -49,15 +49,18 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">Intro</a></li>
+		  <li><a class="nav-link scrollto" href="#data">Data Definitions</a></li>
+		  <li><a class="nav-link scrollto" href="#past">Explore Past Map</a></li>
+		  <li><a class="nav-link scrollto" href="#past2">Explore Past Scatterplot</a></li>
+		  <li><a class="nav-link scrollto" href="#past4">Explore Past Summary</a></li>
           <!-- <li><a class="nav-link scrollto" href="#past">Explore Previous Data</a></li> -->
-          <li class="dropdown"><a href="#past"><span>Explore Previous Data</span> <i class="bi bi-chevron-down"></i></a>
+          <!-- <li class="dropdown"><a href="#past"><span>Explore Previous Data</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#past">Explore Census Tracts</a></li>
               <li><a href="#past2">Deep Dive on Census Tracts</a></li>
               <li><a href="#past3">Identify Correlating Factors</a></li>
             </ul>
-          </li>
+          </li> -->
 		  <li><a class="nav-link scrollto " href="#covid">Explore Covid Data</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -71,9 +74,11 @@
     <div class="container" data-aos="zoom-out" data-aos-delay="100">
       <h1>Visualizing Evictions in the state of Ohio</h1>
       <h2>A group project for UC Berkeley's w209: Data Visualization Class</h2>
+	  <h3>Created By: Joanie Weaver, Joshua Noble, Guy El Khoury, YoungKoung Kim</h3>
+	  <br>
       <div class="d-flex">
         <a href="#about" class="btn-get-started scrollto">Start Exploring</a>
-        <a href="https://www.youtube.com/embed/7f9dqQBYjcA" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Why Should We Care About Evictions?</span></a>
+        <!-- <a href="https://www.youtube.com/embed/7f9dqQBYjcA" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Why Should We Care About Evictions?</span></a> -->
       </div>
     </div>
   </section><!-- End Hero -->
@@ -86,22 +91,11 @@
 
         <div class="section-title">
           <h2>Intro</h2>
-		  <p>"The lack of affordable housing sits at the root of a host of social problems, from poverty and homelessness to educational disparities and health care. That means understanding the eviction crisis is critical to effectively addressing these problems and reducing inequality." - <a href="https://evictionlab.org/">The Eviction Lab</a></p>
-        </div>
+		  
+		  <!-- TODO: Update Guy's Intro Section
+		   -->
+			  <div class='tableauPlaceholder' id='viz1618178056726' style='position: relative'><noscript><a href='#'><img alt='Introduction ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;w2&#47;w209project_v4&#47;Introduction&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='w209project_v4&#47;Introduction' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;w2&#47;w209project_v4&#47;Introduction&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1618178056726');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
 
-        <div class="row">
-          <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
-            <h3>Today, most poor renting families put half or more of their income towards housing costs. </h3>
-            <p class="fst-italic">
-              1 in 4 of those families spend over 70 percent of their income on just rent and utilities. Additionally, only 1 in 4 families who qualify for affordable housing programs get any kind of aid.
-            </p>
- 		  <p>An eviction happens when a landlord expels tenants from a property that he or she owns. Evictions are landlord-initiated involuntary moves that occur to renters. Most evictions happen when renters cannot or do not pay their rent, but landlords can evict renters for many other reasons too.</p>
- 		  <p>The Covid-19 pandemic and flawed policy responses to it have contributed to further widening of long-standing economic and racial divides. Our goals with this visualization are to help you explore these pre-existing divides in the state of Ohio and how flawed policy responses to the pandemic have continued to demonstrate them.</p>
-		  <p> In order to improve policy decisions during the Covid-19 pandemic and beyond in addressing the health, safety, affordability, and other consequences of eviction, we believe it is important to be armed with the appropriate data.</p>
-          </div>
         </div>
 
       </div>
@@ -112,16 +106,15 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Goals</h2>
+          <h2>What You Can Do Here</h2>
         </div>
 
         <div class="row">
             <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column" data-aos="fade-right" data-aos-delay="100">
-            <h3>Understand the context of Previous Data 2000-2016 </h3>
-       		  <p>Explore and Compare evictions across counties and census tracts</p>
-      		  <p>Identify correlating factors with evictions</p>
-       		  <p>Explore and Compare evictions across years and demographics</p>
-      		  <p>Explore and Compare evictions during the covid pandemic across months</p>
+            <h3>Enjoy Exploring Previous Ohio Evictions Data 2000-2016 </h3>
+ 		  <p>Explore and compare evictions across counties like Cuyahoga (where Cleveland is) and Lucas (where Toledo is)</p>
+		  <p>Explore and identify correlating factors like rent burden or race with evictions </p>
+ 		  <p>Explore and compare evictions from the financial crisis in 2009 to 2016</p>
           </div>
     		  <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column" data-aos="fade-up" data-aos-delay="100">
     			  <h3>Explore how evictions and moratoriums have occurred during the COVID-19 pandemic </h3>
@@ -138,9 +131,9 @@
 
     <!-- ======= Counts Section ======= -->
 	<!---TODO: Add some more evictions stats here? --->
-    <section id="counts" class="counts">
-      <div class="container" data-aos="fade-up">
-		  <h2> Our Data</h2>
+   <section id="data" class="counts">
+    <div class="container" data-aos="fade-up">
+	<!--    	  <h2> Our Data</h2>
 		  <p>Our datasets are sourced from <a href="https://evictionlab.org/">The Eviction Lab</a> at Princeton University. This dataset covers:</p>
 		  <br>
 		  <br>
@@ -157,8 +150,8 @@
           <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
             <div class="count-box">
               <i class="bi bi-clock-history"></i>
-              <span data-purecounter-start="0" data-purecounter-end="17" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Years from 2000 - 2016</p>
+              <span data-purecounter-start="0" data-purecounter-end="19" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Years from 2000 - 2016 & 2020 - 2021</p>
             </div>
           </div>
 
@@ -178,9 +171,36 @@
             </div>
           </div>
 
-        </div>
+        </div> -->
 		<br>
-		<p> If you have questions about the data or terminology, please refer to: <a href="https://evictionlab.org/help-faq/">Help & FAQ on EvictionLab</a>.
+		<h3>Data Definitions</h3>
+		<ul>
+		  <li><b>GEOID</b> - Census FIPS code. For additional information, refer to: <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html">Understanding Geographic Identifiers (GEOIDs)</a></li>
+		  <li><b>population</b> - Total population</li>
+		  <li><b>poverty-rate</b> - % of the population with income in the past 12 months below the poverty level</li>
+		  <li><b>pct-renter-occupied</b> - % of occupied housing units that are renter-occupied</li>
+		  <li><b>median-gross-rent</b> - Median gross rent</li>
+		  <li><b>median-household-income</b> - Median household income</li>
+		  <li><b>median-property-value</b> - Median property value</li>
+		  <li><b>rent-burden</b> - Median gross rent as a percentage of household income, max is 50% representing >= 50%</li>
+		  <li><b>pct-white</b> - % population that is White alone and not Hispanic or Latino</li>
+		  <li><b>pct-af-am</b> - % population that is Black or African American alone and not Hispanic or Latino</li>
+		  <li><b>pct-hispanic</b> - % population that is of Hispanic or Latino origin</li>
+		  <li><b>pct-am-ind</b> - % population that is American Indian and Alaska Native alone and not Hispanic or Latino</li>
+		  <li><b>pct-asian</b> - % population that is Asian alone and not Hispanic or Latino</li>
+		  <li><b>pct-other</b> - % population that is other race alone and not Hispanic or Latino</li>
+		  <li><b> renter-occupied-households</b> - Interpolated count of renter-occupied households. Based on Census and ESRI Business Analyst demographic estimates</li>
+		  <li><b>evictions</b> - Number of eviction judgments in which renters were ordered to leave in a given area and year</li>
+		  <li><b>eviction-filings</b> - All eviction cases filed in an area, including multiple cases filed against the same address in the same year</li>
+		  <li><b>eviction-rate</b> - Ratio of the number of renter-occupied households in an area that received an eviction judgement in which renters were ordered to leave</li>
+		  <li><b>eviction-filing-rate</b> - Ratio of the number of evictions filed in an area over the number of renter-occupied homes in that area
+    - Counts all eviction cases filed in an area, including multiple cases filed against the same address in the</li>
+		</ul>
+		<p> If you have additional questions about the data or terminology, please refer to: 
+			<ul>
+				<li><a href="https://eviction-lab-data-downloads.s3.amazonaws.com/DATA_DICTIONARY.txt">Eviction Lab's Data Dictionary</a> </li>
+				<li><a href="https://evictionlab.org/help-faq/">Help & FAQ on EvictionLab</a></li>
+			</ul>
       </div>
     </section><!-- End Counts Section -->
 
@@ -190,37 +210,142 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Past</h2>
-          <h3>Explore <span>Previous</span> Data</h3>
-          <p>Explore and compare evictions across counties and census tracts</p>
+          <h2>Explore Past on a Map</h2>
+          <h3>Explore and compare evictions across counties and census tracts</h3>
         </div>
-		<p>Compare attributes across counties and Census tracts<p>
-		<iframe width="100%" height="695" frameborder="0"
-		  src="https://observablehq.com/embed/cbbe36e57eb5c2e0?cells=viewof+attr%2Cchart%2Cstyle"></iframe>
-<br>
-  		 <div id="past2">
-  		<p>Identify counties or census tracts for follow ups.</p>      
-		<div class='tableauPlaceholder' id='viz1617595995046' style='position: relative'><noscript><a href='#'><img alt='Dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;BX&#47;BXRNY28R9&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;BXRNY28R9' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;BX&#47;BXRNY28R9&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1617595995046');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1400px';vizElement.style.height='1027px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1400px';vizElement.style.height='1027px';} else { vizElement.style.width='100%';vizElement.style.height='1477px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-<br>
-		 <div id="past3">
-		<p>Identify correlating factors with evictions </p>
-		<iframe width="100%" height="1138" frameborder="0"
-		  src="https://observablehq.com/embed/1745ec58fd5c7ad0?cells=viewof+filter2%2Cviewof+filter%2Cviewof+xAttr%2Cviewof+yAttr%2Cchart"></iframe>
-		</div>
-    
-    <div id="past4">
-      <p>Summary of Past Data</p>
+
+	<div class = "setup">
+		<p> <b>How To </b> - 
+			Zoom, hover, click or drag with your mouse. Double click to zoom in and triple click to zoom out. </p>
+		<p> <b> What To </b> - 
+			<ul>
+			  <li>Identify some counties in Ohio with the highest eviction filing rates</li>
+			  <li>Compare demographic statistics in Cuyahoga County (where Cleveland is) with those of Hamilton County (where Cincinnati is)</li>
+			  <li>Explore eviction rates in census tracts of Franklin County (where Columbus is)</li>
+			  <li>Explore census tracts in Lorain County to try to find where Oberlin College is</li>
+			</ul>
+		</p>
+	</div>
+		<div class="chart">
+		<div id="observablehq-viewof-filter-17756ab6"></div>
+		<div id="observablehq-viewof-attr-17756ab6"></div>
+		<div id="observablehq-viewof-data_level-17756ab6"></div>
+		<div id="observablehq-legend_color-17756ab6"></div>
+		<div id="observablehq-chart-17756ab6"></div>
+		<div id="observablehq-style-17756ab6"></div>
+		
+		<script type="module">
+		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+		import define from "https://api.observablehq.com/d/cbbe36e57eb5c2e0.js?v=3";
+		new Runtime().module(define, name => {
+		  if (name === "viewof filter") return new Inspector(document.querySelector("#observablehq-viewof-filter-17756ab6"));
+		  if (name === "viewof attr") return new Inspector(document.querySelector("#observablehq-viewof-attr-17756ab6"));
+		  if (name === "viewof data_level") return new Inspector(document.querySelector("#observablehq-viewof-data_level-17756ab6"));
+		  if (name === "legend_color") return new Inspector(document.querySelector("#observablehq-legend_color-17756ab6"));
+		  if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-17756ab6"));
+		  if (name === "style") return new Inspector(document.querySelector("#observablehq-style-17756ab6"));
+		  return ["filteredData_counties","filteredData","evictions_map_counties","evictions_map","get_data_map","color"].includes(name);
+		});
+		</script>
+	</div>
+	</div>
+  
+    </section><!-- End Section 1 -->
+	
+    <!-- ======= Explore Past Scatterplot Section 2 ======= -->
+    <section id="past2" class="services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Explore Past Scatterplot</h2>
+          <h3>Explore and compare evictions across counties and census tracts using a scatterplot</h3>
+        </div>
+
+	<div class = "setup">
+		<p> <b>How To </b> - 
+			 Filter to compare and identify different sets of data across years, counties, and attributes. Hover to see more details. </p>
+		<p> <b> What To </b> - 
+			<ul>
+			  <li>Identify some counties in Ohio with the highest eviction filing rates and highest pct-white</li>
+			  <li>Compare the rate of filings that result in evictions in Cuyahoga County (where Cleveland is) with those of Hamilton County (where Cincinnati is)</li>
+			  <li>Explore eviction rates in census tracts of Franklin County (where Columbus is)</li>
+			</ul>
+		</p>
+	</div>
+		
+		<div class="chart">
+		<div id="observablehq-viewof-filter2-2eae43cb"></div>
+		<div id="observablehq-viewof-data_level-2eae43cb"></div>
+		<div id="observablehq-viewof-filter-2eae43cb"></div>
+		<div id="observablehq-viewof-xAttr-2eae43cb"></div>
+		<div id="observablehq-viewof-yAttr-2eae43cb"></div>
+		<div id="observablehq-legend_counties-2eae43cb"></div>
+		<div id="observablehq-chart-2eae43cb"></div>
+		
+		<script type="module">
+		import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+		import define from "https://api.observablehq.com/d/1745ec58fd5c7ad0.js?v=3";
+		new Runtime().module(define, name => {
+		  if (name === "viewof filter2") return new Inspector(document.querySelector("#observablehq-viewof-filter2-2eae43cb"));
+		  if (name === "viewof data_level") return new Inspector(document.querySelector("#observablehq-viewof-data_level-2eae43cb"));
+		  if (name === "viewof filter") return new Inspector(document.querySelector("#observablehq-viewof-filter-2eae43cb"));
+		  if (name === "viewof xAttr") return new Inspector(document.querySelector("#observablehq-viewof-xAttr-2eae43cb"));
+		  if (name === "viewof yAttr") return new Inspector(document.querySelector("#observablehq-viewof-yAttr-2eae43cb"));
+		  if (name === "legend_counties") return new Inspector(document.querySelector("#observablehq-legend_counties-2eae43cb"));
+		  if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-2eae43cb"));
+		  return ["filteredData2","update","x","y","color","data","filteredData","county_names","years","attrs","quants","categoricals","county_names_arr","years_arr","xAttr","yAttr","filter2","filter"].includes(name);
+		});
+		</script>
+	</div>
+
+	</div>
+  
+    </section><!-- End Section 2 -->
+
+    <!-- ======= Explore Past Scatterplot Section 3 ======= -->
+    <section id="past3" class="services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Insert Title</h2>
+          <h3>Insert Subtitle</h3>
+        </div>
+
+	<div class = "setup">
+		
+	</div>
+		
+		<div class="chart"> TODO: Insert Guy's plot here </div>
+
+	</div>
+  
+    </section><!-- End Section 3 -->
+
+
+  <!-- ======= Explore Past Summary Section 4 ======= -->	
+    <section id="past4" class="services">
+      <div class="container" data-aos="fade-up">
+          <div class="section-title">
+            <h2>Explore Summary of Past Data</h2>
+            <h3>Explore a summary of the past data and compare how it relates to the present</h3>
+          </div>
+	
+    <div>
       <p>Here is a summary of evictions in Ohio for the past year. We identified demographic factors that are historically related to eviction rates as well as the areas that had high eviction rates. Three cities in Ohio - Cincinnati, Columbus and Cleveland - showed high eviction rates historically. For the three cities, we compared the number of eviction filings in 2020 to the number of average historical filings from 2000 to 2016. This will give us a general idea of how evictions played out during the COVID-19 pandemic.        
 
       </p>
+	  <div class="chart">
       <div class='tableauPlaceholder' id='viz1618142911322' style='position: relative'><noscript><a href='#'><img alt='Evictions in Ohio ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;w2&#47;w209_final_project_youngkoung&#47;EvictionsinOhio&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='w209_final_project_youngkoung&#47;EvictionsinOhio' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;w2&#47;w209_final_project_youngkoung&#47;EvictionsinOhio&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1618142911322');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1216px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+  </div>
           
     <br>		      
 		      
       </div>
-    </section><!-- End Past Data Section -->
+	</div>
+  
+    </section><!-- End Section 4 -->	
 	
-    <!-- ======= Explore Covid Data Section ======= -->
+    <!-- ======= Explore Covid Data Section 5 ======= -->
     <section id="covid" class="services">
       <div class="container" data-aos="fade-up">
 
