@@ -1792,5 +1792,16 @@ section {
 --------------------------------------------------------------*/
 
 #observablehq-chart-848ae57d{
-	width: 1100px;
+	height: 1200px;
+	width: 1200px;
+}
+
+#observablehq-chart-b3f27e8d{
+	height: 1200px;
+	width: 1200px;
+}
+
+.chart{
+	text-align: center;
+	align-items: center;
 }
