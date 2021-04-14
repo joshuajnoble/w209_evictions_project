@@ -80,7 +80,9 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
     .attr("r", 7)
     .style("fill", function(d) {
       return d.color
-    })
+    }).style("stroke", "#555555")
+    .style("stroke-width","1");
+
 
   // Add one dot in the legend for each name.
   legend.selectAll("mylabels")

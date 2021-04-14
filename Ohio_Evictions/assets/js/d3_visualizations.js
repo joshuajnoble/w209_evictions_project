@@ -407,7 +407,7 @@ function social_explorer_evictions(element, legend, selection, city) {
     // mouse is close to the right border of the map, show the tooltip on
     // the left.
     var left = Math.min(w, mouse[0] + 5);
-    var top = mouse[1] + (scrollTop / 7);
+    var top = mouse[1] + (scrollTop / 8);
 
     var cb = social_explorer.find(e => (e.GEO_FIPS == f.properties.GEOID));
 
