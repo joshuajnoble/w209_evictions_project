@@ -24,7 +24,7 @@
 #slider_labels {
   width:600px;
   padding: 0px;
-  margin: 0px;
+  margin-left: -10px;
   font-size: 10px;
   /*height:50px;*/
 }
@@ -157,9 +157,20 @@
   width:360px;
 }
 
+.eviction-moratorium-2 {
+  margin-left: 145px;
+  margin-top:15px;
+  width:155px;
+  height:10px;
+  border-top-style: none;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+}
+
 .eviction-moratorium {
-  margin-left:150px;
-  width:150px;
+  margin-left: 145px;
+  width: 165px;
   height:10px;
   border-top-style: solid;
   border-right-style: solid;
@@ -168,7 +179,13 @@
 }
 
 .moratorium-header {
-  margin-left:130px;
+  margin-left: 145px;
+  font-size: 11px;
+}
+
+.moratorium-header-2 {
+  margin-top: 5px;
+  margin-left: 155px;
   font-size: 11px;
 }
 

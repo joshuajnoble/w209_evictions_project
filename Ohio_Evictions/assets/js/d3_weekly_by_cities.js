@@ -156,13 +156,10 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
                 console.log(per_city_sum);
 
                 if(all_svgs[s] == cle_svg) {
-                  console.log("adasdasdasd doing per cities week cle");
                   d3.select("#cle_evictions_for_week").text(per_city_sum.toString() + " evictions this week");
                 } else if(all_svgs[s] == col_svg) {
-                  console.log("doing per cities week col");
                   d3.select("#col_evictions_for_week").text(per_city_sum.toString() + " evictions this week");
                 } else {
-                  console.log("doing per cities week cin");
                   d3.select("#cin_evictions_for_week").text(per_city_sum.toString() + " evictions this week");
                 }
             }
@@ -295,7 +292,7 @@ function by_weeks_viz_per_city(cle_element, col_element, cin_element, legend) {
       // const scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : 
       //   (document.documentElement || document.body.parentNode || document.body).scrollTop
 
-      var scrollTop = $(window).scrollTop() / 12;
+      var scrollTop = $(window).scrollTop() / 15;
       //console.log(scrollTop);
 
       // Get the current mouse position (as integer)
